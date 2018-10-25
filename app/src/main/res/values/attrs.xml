@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ScaleTextView">
+        <attr name="baseScreenHeight" format="integer"/>
+        <attr name="textSizePx" format="integer" />
+        <attr name="textBold" format="boolean" />
+    </declare-styleable>
+</resources>

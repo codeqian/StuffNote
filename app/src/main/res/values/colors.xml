@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <!--基本配色-->
+    <color name="colorButton">#71c9ce</color>
+    <color name="colorLine">#cbf1f5</color>
+    <color name="colorBg">#e3fdfd</color>
+    <color name="colorText">#a6e3e9</color>
+    <color name="colorButtonText">#ffffff</color>
+
+    <!--七色-->
+    <color name="orange">#f44a70</color>
+</resources>

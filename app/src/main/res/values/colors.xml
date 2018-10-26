@@ -6,6 +6,7 @@
 
     <!--基本配色-->
     <color name="colorButton">#71c9ce</color>
+    <color name="colorTitle">#71c9ce</color>
     <color name="colorLine">#cbf1f5</color>
     <color name="colorBg">#e3fdfd</color>
     <color name="colorText">#a6e3e9</color>

@@ -7,4 +7,83 @@
     android:layout_height="match_parent"
     android:background="@color/colorBg"
     tools:context=".MainActivity">
+    <net.codepig.stuffnote.View.CustomView.ScaleTextView
+        app:textSizePx="18"
+        android:id="@+id/localBtn"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.2"
+        android:text="位置分类"
+        android:textColor="@color/colorTitle"
+        app:layout_constraintStart_toStartOf="parent" />
+    <net.codepig.stuffnote.View.CustomView.ScaleTextView
+        app:textSizePx="18"
+        android:id="@+id/typeBtn"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.2"
+        android:text="用途分类"
+        android:textColor="@color/colorText"
+        app:layout_constraintStart_toEndOf="@+id/localBtn" />
+    <net.codepig.stuffnote.View.CustomView.ScaleTextView
+        app:textSizePx="18"
+        android:id="@+id/colorBtn"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.2"
+        android:text="色彩分类"
+        android:textColor="@color/colorText"
+        app:layout_constraintStart_toEndOf="@+id/typeBtn" />
+    <net.codepig.stuffnote.View.CustomView.ScaleTextView
+        app:textSizePx="18"
+        android:id="@+id/listBtn"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.2"
+        android:text="清单"
+        android:textColor="@color/colorText"
+        app:layout_constraintStart_toEndOf="@+id/colorBtn" />
+
+    <ImageView
+        android:id="@+id/searchBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/colorBtn"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/setBtn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.1" />
+
+    <ImageView
+        android:id="@+id/setBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/colorBtn"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.1" />
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/localBtn"
+        android:background="@drawable/gradual_line" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+
 </android.support.constraint.ConstraintLayout>

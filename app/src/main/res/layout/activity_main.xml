@@ -54,7 +54,9 @@
 
     <ImageView
         android:id="@+id/searchBtn"
-        android:layout_width="0dp"
+        android:layout_marginRight="@dimen/BaseMargin"
+        android:src="@mipmap/search"
+        android:layout_width="20dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/colorBtn"
         app:layout_constraintDimensionRatio="1:1"
@@ -65,7 +67,9 @@
 
     <ImageView
         android:id="@+id/setBtn"
-        android:layout_width="0dp"
+        android:layout_marginRight="@dimen/BaseMargin"
+        android:src="@mipmap/settings"
+        android:layout_width="20dp"
         android:layout_height="wrap_content"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +80,7 @@
     <View
         android:id="@+id/divider"
         android:layout_width="0dp"
-        android:layout_height="20dp"
+        android:layout_height="10dp"
         app:layout_constraintTop_toBottomOf="@+id/localBtn"
         android:background="@drawable/gradual_line" />
 

@@ -7,20 +7,18 @@
     android:background="@color/colorBg"
     tools:context=".SplashActivity">
 
-    <net.codepig.stuffnote.View.CustomView.ScaleTextView
-        android:id="@+id/logo"
+    <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="LOGO"
-        android:textColor="@color/colorButton"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/aeaqas"
         app:layout_constraintBottom_toTopOf="@+id/enterBtn"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.4"
-        app:textSizePx="64" />
+        app:layout_constraintWidth_percent="0.4" />
     <Button
         android:id="@+id/enterBtn"
         android:layout_width="wrap_content"

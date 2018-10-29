@@ -1,5 +1,7 @@
 package net.codepig.stuffnote;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView localBtn,typeBtn,colorBtn,listBtn;
     private Button newBtn;
     private int _pageInde=0;
+    private Context _context;
 
     private final int GO_LOCAL=0;
     private final int GO_TYPE=1;
@@ -24,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        _context=this;
         initView();
     }
 
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         listBtn=findViewById(R.id.listBtn);
         newBtn=findViewById(R.id.newBtn);
 
+        setBtn.setOnClickListener(btnClick);
+        searchBtn.setOnClickListener(btnClick);
         localBtn.setOnClickListener(btnClick);
         typeBtn.setOnClickListener(btnClick);
         colorBtn.setOnClickListener(btnClick);
@@ -47,11 +52,18 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener btnClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            Intent _intent;
 //            Log.d(TAG,"click:"+view.getId());
             switch (view.getId()){
                 case R.id.searchBtn:
+                    _intent=new Intent();
+                    _intent.setClass(_context, SearchPage.class);
+                    startActivity(_intent);
                     break;
                 case R.id.setBtn:
+                    _intent=new Intent();
+                    _intent.setClass(_context, SettingPage.class);
+                    startActivity(_intent);
                     break;
                 case R.id.localBtn:
                     changePage(GO_LOCAL);

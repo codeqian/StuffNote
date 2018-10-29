@@ -1,3 +1,5 @@
 <resources>
     <dimen name="BtnTextSize">24sp</dimen>
+
+    <dimen name="BaseMargin">8dp</dimen>
 </resources>

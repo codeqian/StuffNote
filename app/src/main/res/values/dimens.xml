@@ -1,5 +1,9 @@
 <resources>
     <dimen name="BtnTextSize">24sp</dimen>
+    <dimen name="TitleSize">32</dimen>
+    <dimen name="ContentSize">24</dimen>
+    <dimen name="MenuSize">18</dimen>
 
     <dimen name="BaseMargin">8dp</dimen>
+    <dimen name="BasePadding">4dp</dimen>
 </resources>

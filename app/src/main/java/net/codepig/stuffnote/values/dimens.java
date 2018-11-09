@@ -16,4 +16,7 @@ public class dimens {
     public static Double appScaleH=1.0;
     //顶部栏高度
     public static int topBarHeight=25;
+    //字体尺寸
+    public static int TitleSize=32;
+    public static int ContentSize=24;
 }

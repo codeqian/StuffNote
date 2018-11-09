@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBg"
     tools:context=".MainActivity">
+    <!--按钮区域-->
     <net.codepig.stuffnote.View.CustomView.ScaleTextView
         app:textSizePx="18"
         android:id="@+id/localBtn"
@@ -77,6 +78,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/colorBtn"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.1" />
+    <!--分割线-->
     <View
         android:id="@+id/divider"
         android:layout_width="0dp"
@@ -84,9 +86,11 @@
         app:layout_constraintTop_toBottomOf="@+id/localBtn"
         android:background="@drawable/gradual_line" />
 
+    <!--列表区域-->
     <android.support.v7.widget.RecyclerView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/TipList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <Button

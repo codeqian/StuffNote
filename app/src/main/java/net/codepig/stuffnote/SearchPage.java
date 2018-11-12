@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+/**
+ * 搜索
+ */
 public class SearchPage extends AppCompatActivity {
     private ImageView backBtn;
 

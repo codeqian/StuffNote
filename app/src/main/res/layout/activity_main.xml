@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
     <!--按钮区域-->
     <net.codepig.stuffnote.View.CustomView.ScaleTextView
-        app:textSizePx="18"
+        app:textSizePx="24"
         android:id="@+id/localBtn"
         android:gravity="center"
         android:layout_width="0dp"
@@ -20,7 +20,7 @@
         android:textColor="@color/colorTitle"
         app:layout_constraintStart_toStartOf="parent" />
     <net.codepig.stuffnote.View.CustomView.ScaleTextView
-        app:textSizePx="18"
+        app:textSizePx="24"
         android:id="@+id/typeBtn"
         android:gravity="center"
         android:layout_width="0dp"
@@ -31,7 +31,7 @@
         android:textColor="@color/colorText"
         app:layout_constraintStart_toEndOf="@+id/localBtn" />
     <net.codepig.stuffnote.View.CustomView.ScaleTextView
-        app:textSizePx="18"
+        app:textSizePx="24"
         android:id="@+id/colorBtn"
         android:gravity="center"
         android:layout_width="0dp"
@@ -42,7 +42,7 @@
         android:textColor="@color/colorText"
         app:layout_constraintStart_toEndOf="@+id/typeBtn" />
     <net.codepig.stuffnote.View.CustomView.ScaleTextView
-        app:textSizePx="18"
+        app:textSizePx="24"
         android:id="@+id/listBtn"
         android:gravity="center"
         android:layout_width="0dp"
@@ -90,7 +90,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/TipList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <Button
@@ -105,4 +105,15 @@
         android:background="@drawable/btn_bg_circle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/newItemView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <fragment
+            android:id="@+id/newItemFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="net.codepig.stuffnote.View.NewItemFragment"/>
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>

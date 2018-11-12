@@ -2,6 +2,7 @@ package net.codepig.stuffnote;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,14 +13,21 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.codepig.stuffnote.DataBean.MessageCode;
 import net.codepig.stuffnote.DataBean.TipInfo;
+import net.codepig.stuffnote.View.Adapter.ListItemClickListener;
 import net.codepig.stuffnote.View.Adapter.TipAdapter;
 
 import java.util.List;
 
+import static net.codepig.stuffnote.DataBean.MessageCode.GO_COLOR;
+import static net.codepig.stuffnote.DataBean.MessageCode.GO_LIST;
+import static net.codepig.stuffnote.DataBean.MessageCode.GO_LOCAL;
+import static net.codepig.stuffnote.DataBean.MessageCode.GO_TYPE;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.getLocationTipList;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.testTipList;
 
@@ -32,13 +40,15 @@ public class MainActivity extends AppCompatActivity {
     //view
     private ImageView searchBtn,setBtn;
     private TextView localBtn,typeBtn,colorBtn,listBtn;
-    private Button newBtn;
+    private Button newBtn,cancelNew,enterNew;
     private RecyclerView TipList;
+    private FrameLayout newItemView;
+    private TipAdapter tipAdapter;
 
-    private final int GO_LOCAL=0;
-    private final int GO_TYPE=1;
-    private final int GO_COLOR=2;
-    private final int GO_LIST=3;
+    //Fragment
+    private Fragment newItemFragment;
+
+    //final TAG
     private final String TAG="MAIN PAGE LOGCAT";
 
     @Override
@@ -59,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         listBtn=findViewById(R.id.listBtn);
         newBtn=findViewById(R.id.newBtn);
         TipList=findViewById(R.id.TipList);
+        newItemView=findViewById(R.id.newItemView);
+        cancelNew=findViewById(R.id.cancelNew);
+        enterNew=findViewById(R.id.enterNew);
 
         setBtn.setOnClickListener(btnClick);
         searchBtn.setOnClickListener(btnClick);
@@ -67,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
         colorBtn.setOnClickListener(btnClick);
         listBtn.setOnClickListener(btnClick);
         newBtn.setOnClickListener(btnClick);
+        enterNew.setOnClickListener(btnClick);
+        cancelNew.setOnClickListener(btnClick);
     }
 
     private View.OnClickListener btnClick = new View.OnClickListener() {
@@ -102,7 +117,13 @@ public class MainActivity extends AppCompatActivity {
                         //新建清单
                     }else{
                         //新建物品
+                        newItemView.setVisibility(View.VISIBLE);
                     }
+                    break;
+                case R.id.enterNew:
+                    break;
+                case R.id.cancelNew:
+                    newItemView.setVisibility(View.GONE);
                     break;
                     default:
                         break;
@@ -144,7 +165,17 @@ public class MainActivity extends AppCompatActivity {
 //        TipList.setLayoutManager(new GridLayoutManager(this, 2));//这里用线性宫格显示 类似于grid view
 //        TipList.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));//这里用线性宫格显示 类似于瀑布流
         LocationTipList=getLocationTipList();
-        Log.d(TAG,"list size:"+LocationTipList.size());
-        TipList.setAdapter(new TipAdapter(this,LocationTipList));
+        tipAdapter=new TipAdapter(this,LocationTipList);
+        TipList.setAdapter(tipAdapter);
+        tipAdapter.setOnItemClickListener(new ListItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent _intent=new Intent();
+                _intent.putExtra("type", _pageIndex+"");
+                _intent.putExtra("value", LocationTipList.get(position).get_value());
+                _intent.setClass(_context, ItemListPage.class);
+                startActivity(_intent);
+            }
+        });
     }
 }

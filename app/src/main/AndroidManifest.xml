@@ -35,6 +35,7 @@
         </activity>
         <activity android:name=".SettingPage"></activity>
         <activity android:name=".SearchPage"></activity>
+        <activity android:name=".ItemListPage"></activity>
     </application>
 
 </manifest>

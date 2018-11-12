@@ -59,7 +59,7 @@ public class BeanBox {
 
     public static void testTipList(){
         LocationTipList=new ArrayList<>();
-        for (int i=0;i<10;i++){
+        for (int i=0;i<20;i++){
             TipInfo _tip=new TipInfo();
             _tip.set_type(TipInfo.LOCATION_TIP);
             _tip.set_value("位置"+i);

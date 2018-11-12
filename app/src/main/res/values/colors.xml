@@ -3,6 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorTranslateWhite">#33FFFFFF</color>
+    <color name="colorTranslateBlack">#33000000</color>
 
     <!--基本配色-->
     <color name="colorButton">#71c9ce</color>

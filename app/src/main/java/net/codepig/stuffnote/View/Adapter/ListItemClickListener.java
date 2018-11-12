@@ -7,5 +7,5 @@ import android.view.View;
  * Created by Administrator on 2015/4/22.
  */
 public  interface ListItemClickListener {
-    void onClick(View item, View widget, String type, int position, int which);
+    void onItemClick(View item, int position);
 }

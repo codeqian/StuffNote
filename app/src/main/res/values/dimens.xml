@@ -5,5 +5,7 @@
     <dimen name="MenuSize">18</dimen>
 
     <dimen name="BaseMargin">8dp</dimen>
-    <dimen name="BasePadding">4dp</dimen>
+    <dimen name="HalfMargin">4dp</dimen>
+    <dimen name="BasePadding">8dp</dimen>
+    <dimen name="HalfPadding">4dp</dimen>
 </resources>

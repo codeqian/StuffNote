@@ -6,6 +6,8 @@
 
     <dimen name="BaseMargin">8dp</dimen>
     <dimen name="HalfMargin">4dp</dimen>
+    <dimen name="DoubleMargin">16dp</dimen>
     <dimen name="BasePadding">8dp</dimen>
     <dimen name="HalfPadding">4dp</dimen>
+    <dimen name="DoublePadding">16dp</dimen>
 </resources>

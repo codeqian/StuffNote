@@ -12,7 +12,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/btn_bg_round_stroke"
-        android:padding="@dimen/BasePadding"
+        android:paddingTop="@dimen/BasePadding"
+        android:paddingBottom="@dimen/BasePadding"
+        android:paddingLeft="@dimen/DoublePadding"
+        android:paddingRight="@dimen/DoublePadding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,32 +24,39 @@
         app:layout_constraintWidth_percent="0.7">
 
         <EditText
+            android:textColor="@color/colorTitle"
             android:id="@+id/item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="输入信息" />
+            android:textColorHint="@color/colorText"
+            android:textCursorDrawable="@null"
+            android:theme="@style/MyEditText"
+            android:hint="输入名称" />
 
         <EditText
+            android:textColor="@color/colorTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="输入信息" />
+            android:textColorHint="@color/colorText"
+            android:textCursorDrawable="@null"
+            android:theme="@style/MyEditText"
+            android:hint="输入详情" />
 
         <EditText
+            android:textColor="@color/colorTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="输入信息" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="输入信息" />
+            android:textColorHint="@color/colorText"
+            android:textCursorDrawable="@null"
+            android:theme="@style/MyEditText"
+            android:hint="输入时间" />
 
         <LinearLayout
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <Button
-                android:id="@+id/enterNew"
+                android:id="@+id/enterNewTodo"
                 android:text="确定"
                 android:layout_margin="@dimen/BaseMargin"
                 android:background="@drawable/btn_bg_rounded"
@@ -54,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="32dp" />
             <Button
-                android:id="@+id/cancelNew"
+                android:id="@+id/cancelNewTodo"
                 android:text="取消"
                 android:layout_margin="@dimen/BaseMargin"
                 android:background="@drawable/btn_bg_rounded"

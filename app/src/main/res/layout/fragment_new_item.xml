@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorTranslateWhite"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:background="@drawable/btn_bg_round_stroke"
+        android:paddingTop="@dimen/BasePadding"
+        android:paddingBottom="@dimen/BasePadding"
+        android:paddingLeft="@dimen/DoublePadding"
+        android:paddingRight="@dimen/DoublePadding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ImageBtn"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:src="@mipmap/camera"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout" />
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/ImageBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <EditText
+                android:textColor="@color/colorTitle"
+                android:id="@+id/item_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorText"
+                android:textCursorDrawable="@null"
+                android:theme="@style/MyEditText"
+                android:hint="输入名称" />
+
+            <EditText
+                android:textColor="@color/colorTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorText"
+                android:textCursorDrawable="@null"
+                android:theme="@style/MyEditText"
+                android:hint="输入位置" />
+
+            <EditText
+                android:textColor="@color/colorTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorText"
+                android:textCursorDrawable="@null"
+                android:theme="@style/MyEditText"
+                android:hint="输入功能标签" />
+
+            <EditText
+                android:textColor="@color/colorTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorText"
+                android:textCursorDrawable="@null"
+                android:theme="@style/MyEditText"
+                android:hint="输入详情备注" />
+
+            <EditText
+                android:textColor="@color/colorTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorText"
+                android:textCursorDrawable="@null"
+                android:theme="@style/MyEditText"
+                android:hint="输入色彩" />
+
+            <LinearLayout
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/enterNewItem"
+                    android:text="确定"
+                    android:layout_margin="@dimen/BaseMargin"
+                    android:background="@drawable/btn_bg_rounded"
+                    android:textColor="@color/colorButtonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp" />
+                <Button
+                    android:id="@+id/cancelNewItem"
+                    android:text="取消"
+                    android:layout_margin="@dimen/BaseMargin"
+                    android:background="@drawable/btn_bg_rounded"
+                    android:textColor="@color/colorButtonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

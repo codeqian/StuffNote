@@ -22,7 +22,7 @@ public class ItemInfoFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        thisView=inflater.inflate(R.layout.item_info, container, false);
+        thisView=inflater.inflate(R.layout.fragment_item_info, container, false);
         return thisView;
     }
 

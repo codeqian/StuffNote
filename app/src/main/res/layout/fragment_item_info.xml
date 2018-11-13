@@ -12,7 +12,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/btn_bg_round_stroke"
-        android:padding="@dimen/BasePadding"
+        android:paddingTop="@dimen/BasePadding"
+        android:paddingBottom="@dimen/BasePadding"
+        android:paddingLeft="@dimen/DoublePadding"
+        android:paddingRight="@dimen/DoublePadding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,36 +29,53 @@
                 android:text="Title"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
-                android:textColor="@color/colorText"
+                android:ellipsize="end"
+                android:textColor="@color/colorTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
+                android:id="@+id/editItemBtn"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/HalfMargin"
+                android:src="@mipmap/edit"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <ImageView
+                android:id="@+id/closeItemBtn"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="@dimen/HalfMargin"
                 android:src="@mipmap/close"
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
         </LinearLayout>
-        <EditText
+        <net.codepig.stuffnote.View.CustomView.ScaleTextView
+            app:textSizePx="32"
             android:id="@+id/item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="输入信息" />
+            android:textColor="@color/colorTitle"
+            android:text="位置" />
 
-        <EditText
+        <net.codepig.stuffnote.View.CustomView.ScaleTextView
+            app:textSizePx="32"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="输入信息" />
+            android:textColor="@color/colorTitle"
+            android:text="功能" />
 
-        <EditText
+        <net.codepig.stuffnote.View.CustomView.ScaleTextView
+            app:textSizePx="32"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="输入信息" />
+            android:textColor="@color/colorTitle"
+            android:text="备注详情" />
 
-        <EditText
+        <net.codepig.stuffnote.View.CustomView.ScaleTextView
+            app:textSizePx="32"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="输入信息" />
+            android:textColor="@color/colorTitle"
+            android:text="色彩" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

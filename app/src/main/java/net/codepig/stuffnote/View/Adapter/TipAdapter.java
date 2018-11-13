@@ -16,9 +16,7 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.MyViewHolder> {
     private Context context;
     private List<TipInfo> myData;
     private LayoutInflater inflater;
-    private String _uid="";
     private ViewGroup _parent;
-
     //声明接口
     private ListItemClickListener mOnItemClickListener;
 

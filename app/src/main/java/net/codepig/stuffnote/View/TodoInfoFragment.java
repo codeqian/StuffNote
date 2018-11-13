@@ -10,20 +10,17 @@ import android.view.ViewGroup;
 import net.codepig.stuffnote.R;
 
 /**
- * 新建物品
+ * 清单详情
  */
-public class NewItemFragment extends Fragment {
-    private View thisView;
+public class TodoInfoFragment extends Fragment {
 
-    public NewItemFragment() {
+    public TodoInfoFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        thisView=inflater.inflate(R.layout.fragment_new_item, container, false);
-        return thisView;
+        return inflater.inflate(R.layout.fragment_todo_info, container, false);
     }
 
     @Override

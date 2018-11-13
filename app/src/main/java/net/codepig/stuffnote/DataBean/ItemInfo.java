@@ -6,7 +6,7 @@ package net.codepig.stuffnote.DataBean;
 public class ItemInfo {
     private String _name;
     private String _location;
-    private String _color;
+    private int _color;
     private String _function;
     private String _description;
 
@@ -24,10 +24,10 @@ public class ItemInfo {
         return _location;
     }
 
-    public void set_color(String _color) {
+    public void set_color(int _color) {
         this._color = _color;
     }
-    public String get_color() {
+    public int get_color() {
         return _color;
     }
 

@@ -9,46 +9,57 @@
     tools:context=".MainActivity">
     <!--按钮区域-->
     <net.codepig.stuffnote.View.CustomView.ScaleTextView
-        app:textSizePx="24"
+        app:textSizePx="28"
+        android:id="@+id/allBtn"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.16"
+        android:text="全部"
+        android:textColor="@color/colorTitle"
+        app:layout_constraintStart_toStartOf="parent" />
+    <net.codepig.stuffnote.View.CustomView.ScaleTextView
+        app:textSizePx="28"
         android:id="@+id/localBtn"
         android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="48dp"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.2"
-        android:text="位置分类"
-        android:textColor="@color/colorTitle"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintWidth_percent="0.16"
+        android:text="按位置"
+        android:textColor="@color/colorText"
+        app:layout_constraintStart_toEndOf="@+id/allBtn" />
     <net.codepig.stuffnote.View.CustomView.ScaleTextView
-        app:textSizePx="24"
+        app:textSizePx="28"
         android:id="@+id/typeBtn"
         android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="48dp"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.2"
-        android:text="用途分类"
+        app:layout_constraintWidth_percent="0.16"
+        android:text="按用途"
         android:textColor="@color/colorText"
         app:layout_constraintStart_toEndOf="@+id/localBtn" />
     <net.codepig.stuffnote.View.CustomView.ScaleTextView
-        app:textSizePx="24"
+        app:textSizePx="28"
         android:id="@+id/colorBtn"
         android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="48dp"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.2"
-        android:text="色彩分类"
+        app:layout_constraintWidth_percent="0.16"
+        android:text="按色彩"
         android:textColor="@color/colorText"
         app:layout_constraintStart_toEndOf="@+id/typeBtn" />
     <net.codepig.stuffnote.View.CustomView.ScaleTextView
-        app:textSizePx="24"
+        app:textSizePx="28"
         android:id="@+id/listBtn"
         android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="48dp"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintWidth_percent="0.16"
         android:text="清单"
         android:textColor="@color/colorText"
         app:layout_constraintStart_toEndOf="@+id/colorBtn" />
@@ -115,5 +126,27 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:name="net.codepig.stuffnote.View.NewItemFragment"/>
+    </FrameLayout>
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/itemInfoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <fragment
+            android:id="@+id/ItemInfoFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="net.codepig.stuffnote.View.ItemInfoFragment"/>
+    </FrameLayout>
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/newTodoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <fragment
+            android:id="@+id/newTodoFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="net.codepig.stuffnote.View.NewTodoFragment"/>
     </FrameLayout>
 </android.support.constraint.ConstraintLayout>

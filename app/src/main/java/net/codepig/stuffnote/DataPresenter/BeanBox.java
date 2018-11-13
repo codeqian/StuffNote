@@ -57,6 +57,7 @@ public class BeanBox {
         ToDoList = toDoList;
     }
 
+    //    测试数据---------------------------------------------------------------------------------------
     public static void testTipList(){
         LocationTipList=new ArrayList<>();
         for (int i=0;i<20;i++){
@@ -64,6 +65,19 @@ public class BeanBox {
             _tip.set_type(TipInfo.LOCATION_TIP);
             _tip.set_value("位置"+i);
             LocationTipList.add(_tip);
+        }
+    }
+
+    public static void testItemList(){
+        ItemList=new ArrayList<>();
+        for (int i=0;i<20;i++){
+            ItemInfo _item=new ItemInfo();
+            _item.set_name("物品"+1);
+            _item.set_location("位置"+i);
+            _item.set_color(0);
+            _item.set_function("功能"+i);
+            _item.set_description("物品描述……");
+            ItemList.add(_item);
         }
     }
 }

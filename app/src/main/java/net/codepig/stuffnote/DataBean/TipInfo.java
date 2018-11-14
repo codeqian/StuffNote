@@ -8,8 +8,9 @@ public class TipInfo {
     private String _value;
 
     public static final int LOCATION_TIP=0;
-    public static final int FUNCTION_TIP=0;
-    public static final int COLOR_TIP=0;
+    public static final int FUNCTION_TIP=1;
+    public static final int COLOR_TIP=2;
+    public static final int ALL_TIP=4;
 
     public void set_type(int _type) {
         this._type = _type;

@@ -2,15 +2,10 @@ package net.codepig.stuffnote;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -19,21 +14,25 @@ import android.widget.TextView;
 
 import net.codepig.stuffnote.DataBean.ItemInfo;
 import net.codepig.stuffnote.DataBean.TipInfo;
+import net.codepig.stuffnote.DataPresenter.DataBaseExecutive;
 import net.codepig.stuffnote.View.Adapter.ItemAdapter;
 import net.codepig.stuffnote.View.Adapter.ListItemClickListener;
 import net.codepig.stuffnote.View.Adapter.TipAdapter;
 
 import java.util.List;
 
-import static net.codepig.stuffnote.DataBean.MessageCode.GO_ALL;
-import static net.codepig.stuffnote.DataBean.MessageCode.GO_COLOR;
-import static net.codepig.stuffnote.DataBean.MessageCode.GO_LIST;
-import static net.codepig.stuffnote.DataBean.MessageCode.GO_LOCAL;
-import static net.codepig.stuffnote.DataBean.MessageCode.GO_TYPE;
+import static net.codepig.stuffnote.DataPresenter.BeanBox.getColorTipList;
+import static net.codepig.stuffnote.DataPresenter.BeanBox.getFunctionTipList;
+import static net.codepig.stuffnote.DataPresenter.BeanBox.testTipList;
+import static net.codepig.stuffnote.common.MessageCode.GO_ALL;
+import static net.codepig.stuffnote.common.MessageCode.GO_COLOR;
+import static net.codepig.stuffnote.common.MessageCode.GO_FUNCTION;
+import static net.codepig.stuffnote.common.MessageCode.GO_LIST;
+import static net.codepig.stuffnote.common.MessageCode.GO_LOCAL;
+import static net.codepig.stuffnote.DataPresenter.BeanBox.GetItemList;
+import static net.codepig.stuffnote.DataPresenter.BeanBox.GetTipList;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.getItemList;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.getLocationTipList;
-import static net.codepig.stuffnote.DataPresenter.BeanBox.testItemList;
-import static net.codepig.stuffnote.DataPresenter.BeanBox.testTipList;
 
 public class MainActivity extends AppCompatActivity {
     private int _pageIndex=0;
@@ -68,7 +67,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         _context=this;
+        //初始化sql
+        DataBaseExecutive.set_context(this);
+        DataBaseExecutive.initSqlManager();
+        //初始化View
         initView();
+        //test
+        testTipList();
     }
 
     private void initView(){
@@ -111,6 +116,12 @@ public class MainActivity extends AppCompatActivity {
         enterNewItem.setOnClickListener(btnClick);
         editItemBtn.setOnClickListener(btnClick);
         closeItemBtn.setOnClickListener(btnClick);
+
+        //获得当前有的标签和物品列表
+        GetTipList();
+//        if(GetItemList()>0){
+//            //创建物品列表
+//        }
     }
 
     private View.OnClickListener btnClick = new View.OnClickListener() {
@@ -136,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                     changePage(GO_LOCAL);
                     break;
                 case R.id.typeBtn:
-                    changePage(GO_TYPE);
+                    changePage(GO_FUNCTION);
                     break;
                 case R.id.colorBtn:
                     changePage(GO_COLOR);
@@ -190,17 +201,19 @@ public class MainActivity extends AppCompatActivity {
         listBtn.setTextColor(getResources().getColor(R.color.colorText));
         switch (_index){
             case GO_ALL:
-                CreateTestItemList();
+//                CreateItemList();
                 allBtn.setTextColor(getResources().getColor(R.color.colorTitle));
                 break;
             case GO_LOCAL:
-                CreateTestTipList();
+                CreateTipList(_index);
                 localBtn.setTextColor(getResources().getColor(R.color.colorTitle));
                 break;
-            case GO_TYPE:
+            case GO_FUNCTION:
+                CreateTipList(_index);
                 typeBtn.setTextColor(getResources().getColor(R.color.colorTitle));
                 break;
             case GO_COLOR:
+                CreateTipList(_index);
                 colorBtn.setTextColor(getResources().getColor(R.color.colorTitle));
                 break;
             case GO_LIST:
@@ -211,30 +224,46 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    测试数据---------------------------------------------------------------------------------------
-    //测试标签列表
-    private void CreateTestTipList(){
-        testTipList();//locationTip
+    /**
+     * 创建标签列表
+     * @param _index
+     */
+    private void CreateTipList(int _index){
+        List<TipInfo> _TipList=null;
         TipList.removeAllViews();
-
-        LocationTipList=getLocationTipList();
-        tipAdapter=new TipAdapter(this,LocationTipList);
+        switch (_index){
+            case GO_LOCAL:
+                _TipList=getLocationTipList();
+                break;
+            case GO_FUNCTION:
+                _TipList=getFunctionTipList();
+                break;
+            case GO_COLOR:
+                _TipList=getColorTipList();
+                break;
+        }
+        if(_TipList==null){
+            return;
+        }
+        final List<TipInfo> _List=_TipList;
+        tipAdapter=new TipAdapter(this,_List);
         TipList.setAdapter(tipAdapter);
         tipAdapter.setOnItemClickListener(new ListItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent _intent=new Intent();
                 _intent.putExtra("type", _pageIndex+"");
-                _intent.putExtra("value", LocationTipList.get(position).get_value());
+                _intent.putExtra("value", _List.get(position).get_value());
                 _intent.setClass(_context, ItemListPage.class);
                 startActivity(_intent);
             }
         });
     }
 
-    //测试物品列表
-    private void CreateTestItemList(){
-        testItemList();
+    /**
+     * 创建物品列表
+     */
+    private void CreateItemList(){
         TipList.removeAllViews();
 
         itemList=getItemList();

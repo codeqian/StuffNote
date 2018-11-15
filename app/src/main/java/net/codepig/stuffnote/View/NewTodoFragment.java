@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import net.codepig.stuffnote.R;
 
 /**
- * 新建清单
+ * 新建清单(暂未开放)
  */
 public class NewTodoFragment extends Fragment {
 

@@ -1,5 +1,6 @@
 package net.codepig.stuffnote.DataPresenter;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
@@ -14,19 +15,23 @@ import static net.codepig.stuffnote.DataBean.TipInfo.ALL_TIP;
 import static net.codepig.stuffnote.DataBean.TipInfo.COLOR_TIP;
 import static net.codepig.stuffnote.DataBean.TipInfo.FUNCTION_TIP;
 import static net.codepig.stuffnote.DataBean.TipInfo.LOCATION_TIP;
+import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.CursorQueryAllItem;
 import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.InsertTipData;
+import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.QueryTheItemData;
 import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.QueryTipData;
+import static net.codepig.stuffnote.DataPresenter.TimeBox.getCurrentTime;
 
 /**
  * 统一存放数据bean
  * 所有的数据库操作也先从这里过
  */
 public class BeanBox {
-    private static List<ItemInfo> ItemList;
-    private static List<TipInfo> FunctionTipList;
-    private static List<TipInfo> LocationTipList;
-    private static List<TipInfo> ColorTipList;
-    private static List<ToDoInfo> ToDoList;
+    private static List<ItemInfo> ItemList;//所有物品列表
+    private static List<ItemInfo> TheItemList;//特定名称物品列表（用于搜索）
+    private static List<TipInfo> FunctionTipList;//功能标签
+    private static List<TipInfo> LocationTipList;//位置标签
+    private static List<TipInfo> ColorTipList;//色彩标签
+    private static List<ToDoInfo> ToDoList;//清单列表
 
     final static String TAG="BeanBox LOGCAT";
 
@@ -70,6 +75,14 @@ public class BeanBox {
         ToDoList = toDoList;
     }
 
+    public static void set_context(Context _c){
+        DataBaseExecutive.set_context(_c);
+    }
+
+    public static void initSqlManager(){
+        DataBaseExecutive.initSqlManager();
+    }
+
     /**
      * 获得标签列表
      */
@@ -110,16 +123,77 @@ public class BeanBox {
                     break;
             }
         }
-        Log.d(TAG,"LocationTipList:"+LocationTipList.size());
+//        Log.d(TAG,"LocationTipList:"+LocationTipList.size());
         return _list.size();
     }
 
     /**
-     * 获得物品列表
+     * 获得所有物品列表
      */
     public static int GetItemList(){
         ItemList=new ArrayList<>();
+        //查询
+        Cursor c=CursorQueryAllItem();
+        if(c==null){
+            Log.d(TAG,"c==null");
+            return 0;
+        }else{
+            int listLength = c.getCount();
+            for (int i = 0; i < listLength; i++) {
+                ItemInfo _item=new ItemInfo();
+//                "_id","_name","_loc", "_fun", "_color","_des", "_image","_time"
+                _item.set_id(c.getString(0));
+                _item.set_name(c.getString(1));
+                Log.d(TAG,"_item:"+_item.get_name());
+                _item.set_location(c.getString(2));
+                _item.set_function(c.getString(3));
+                _item.set_color(c.getString(4));
+                _item.set_description(c.getString(5));
+                _item.set_imageUrl(c.getString(6));
+                _item.set_time(c.getString(7));
+                ItemList.add(_item);
+                c.moveToNext();
+            }
+            c.close();
+        }
         return ItemList.size();
+    }
+
+    /**
+     * 查询单一物品信息
+     * @return
+     */
+    public static int GetTheItemList(String _name){
+        TheItemList=new ArrayList<>();
+        //查询
+        Cursor c=QueryTheItemData(_name);
+        if(c==null){
+            Log.d(TAG,"c==null");
+            return 0;
+        }else{
+            int listLength = c.getCount();
+            for (int i = 0; i < listLength; i++) {
+                ItemInfo _tip=new ItemInfo();
+//                "_id","_name","_loc", "_fun", "_color","_des", "_image","_time"
+                _tip.set_id(c.getString(0));
+                _tip.set_name(c.getString(1));
+                _tip.set_location(c.getString(2));
+                _tip.set_function(c.getString(3));
+                _tip.set_color(c.getString(4));
+                _tip.set_description(c.getString(5));
+                _tip.set_imageUrl(c.getString(6));
+                _tip.set_time(c.getString(7));
+                TheItemList.add(_tip);
+                c.moveToNext();
+            }
+            c.close();
+        }
+        return ItemList.size();
+    }
+
+    public static long InsertNewItem(ItemInfo _info){
+        long _id=DataBaseExecutive.InsertItemData(_info.get_name(),_info.get_location(),_info.get_function(),_info.get_color(),_info.get_description(),_info.get_imageUrl(),_info.get_time());
+        return _id;
     }
 
     //    测试数据---------------------------------------------------------------------------------------
@@ -127,18 +201,5 @@ public class BeanBox {
         InsertTipData(LOCATION_TIP,"客厅");
         InsertTipData(FUNCTION_TIP,"日用品");
         InsertTipData(COLOR_TIP,"red");
-    }
-
-    public static void testItemList(){
-        ItemList=new ArrayList<>();
-        for (int i=0;i<20;i++){
-            ItemInfo _item=new ItemInfo();
-            _item.set_name("物品"+1);
-            _item.set_location("位置"+i);
-            _item.set_color(0);
-            _item.set_function("功能"+i);
-            _item.set_description("物品描述……");
-            ItemList.add(_item);
-        }
     }
 }

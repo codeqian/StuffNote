@@ -17,42 +17,43 @@
     <net.codepig.stuffnote.View.CustomView.ScaleTextView
         android:id="@+id/itemName"
         android:layout_marginLeft="@dimen/BaseMargin"
-        android:textColor="@color/colorText"
+        android:textColor="@color/colorTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         app:layout_constraintStart_toEndOf="@id/itemColor"
         android:text="名称"
         app:textSizePx="32" />
+
     <net.codepig.stuffnote.View.CustomView.ScaleTextView
         android:id="@+id/itemFunction"
-        android:layout_marginLeft="@dimen/BaseMargin"
-        android:textColor="@color/colorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@id/itemName"
         android:text="功能"
+        android:textColor="@color/colorText"
+        app:layout_constraintStart_toEndOf="@+id/itemName"
+        app:layout_constraintTop_toTopOf="@+id/itemName"
         app:textSizePx="32" />
+
     <net.codepig.stuffnote.View.CustomView.ScaleTextView
         android:id="@+id/itemLocation"
-        android:layout_marginLeft="@dimen/BaseMargin"
-        android:textColor="@color/colorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@id/itemFunction"
+        android:layout_marginStart="@dimen/BaseMargin"
         android:text="位置"
+        android:textColor="@color/colorText"
+        app:layout_constraintStart_toEndOf="@id/itemFunction"
+        app:layout_constraintTop_toTopOf="@+id/itemName"
         app:textSizePx="32" />
+
     <net.codepig.stuffnote.View.CustomView.ScaleTextView
         android:id="@+id/itemDescription"
-        android:layout_marginLeft="@dimen/BaseMargin"
-        android:textColor="@color/colorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintTop_toBottomOf="@id/itemName"
         android:text="位置"
+        android:textColor="@color/colorText"
+        app:layout_constraintStart_toStartOf="@+id/itemName"
+        app:layout_constraintTop_toBottomOf="@+id/itemFunction"
         app:textSizePx="32" />
     <!--分割线-->
     <View

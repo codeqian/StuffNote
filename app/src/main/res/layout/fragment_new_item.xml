@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <EditText
+                android:text="测试名"
                 android:textColor="@color/colorTitle"
                 android:id="@+id/item_name"
                 android:layout_width="match_parent"
@@ -46,6 +47,8 @@
                 android:hint="输入名称" />
 
             <EditText
+                android:text="测试位置"
+                android:id="@+id/item_loc"
                 android:textColor="@color/colorTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,6 +58,8 @@
                 android:hint="输入位置" />
 
             <EditText
+                android:text="测试功能"
+                android:id="@+id/item_fun"
                 android:textColor="@color/colorTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,6 +69,8 @@
                 android:hint="输入功能标签" />
 
             <EditText
+                android:text="随便写的测试描述"
+                android:id="@+id/item_des"
                 android:textColor="@color/colorTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,6 +80,8 @@
                 android:hint="输入详情备注" />
 
             <EditText
+                android:text="red"
+                android:id="@+id/item_color"
                 android:textColor="@color/colorTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <Button
-                    android:id="@+id/enterNewItem"
+                    android:id="@+id/enterItem"
                     android:text="确定"
                     android:layout_margin="@dimen/BaseMargin"
                     android:background="@drawable/btn_bg_rounded"
@@ -94,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="32dp" />
                 <Button
-                    android:id="@+id/cancelNewItem"
+                    android:id="@+id/cancelItem"
                     android:text="取消"
                     android:layout_margin="@dimen/BaseMargin"
                     android:background="@drawable/btn_bg_rounded"

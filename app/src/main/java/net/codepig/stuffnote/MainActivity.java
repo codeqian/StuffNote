@@ -2,10 +2,13 @@ package net.codepig.stuffnote;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -14,13 +17,17 @@ import android.widget.TextView;
 
 import net.codepig.stuffnote.DataBean.ItemInfo;
 import net.codepig.stuffnote.DataBean.TipInfo;
-import net.codepig.stuffnote.DataPresenter.DataBaseExecutive;
+import net.codepig.stuffnote.DataPresenter.BeanBox;
 import net.codepig.stuffnote.View.Adapter.ItemAdapter;
 import net.codepig.stuffnote.View.Adapter.ListItemClickListener;
 import net.codepig.stuffnote.View.Adapter.TipAdapter;
+import net.codepig.stuffnote.View.FragmentDataCommunicate;
+import net.codepig.stuffnote.View.ItemInfoFragment;
+import net.codepig.stuffnote.common.MessageCode;
 
 import java.util.List;
 
+import static net.codepig.stuffnote.DataPresenter.BeanBox.GetItemList;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.getColorTipList;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.getFunctionTipList;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.testTipList;
@@ -29,35 +36,25 @@ import static net.codepig.stuffnote.common.MessageCode.GO_COLOR;
 import static net.codepig.stuffnote.common.MessageCode.GO_FUNCTION;
 import static net.codepig.stuffnote.common.MessageCode.GO_LIST;
 import static net.codepig.stuffnote.common.MessageCode.GO_LOCAL;
-import static net.codepig.stuffnote.DataPresenter.BeanBox.GetItemList;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.GetTipList;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.getItemList;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.getLocationTipList;
 
-public class MainActivity extends AppCompatActivity {
-    private int _pageIndex=0;
+public class MainActivity extends AppCompatActivity implements FragmentDataCommunicate {
+    private int _pageIndex=4;//4全部，0位置，1用途，2色彩，3清单
     private Context _context;
 
-    //data
-    private static List<TipInfo> LocationTipList;
-    private static List<ItemInfo> itemList;
     //view
     private ImageView searchBtn,setBtn;
     private TextView localBtn,typeBtn,colorBtn,listBtn,allBtn;
     private Button newBtn;
-    private RecyclerView TipList;
+    private RecyclerView mListVie;
     private FrameLayout newItemView,newTodoView,itemInfoView;
     private TipAdapter tipAdapter;
     private ItemAdapter itemAdapter;
 
-    //fragment内的View
-    private ImageView editItemBtn,closeItemBtn;
-    private Button cancelNewTodo,enterNewTodo,cancelNewItem,enterNewItem;
-
-    //Fragment
-//    private Fragment newItemFragment;
-//    private Fragment newTodoFragment;
-//    private Fragment ItemInfoFragment;
+    //fragment
+    private ItemInfoFragment itemInfoFragment;
 
     //final TAG
     private final String TAG="MAIN PAGE LOGCAT";
@@ -68,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         _context=this;
         //初始化sql
-        DataBaseExecutive.set_context(this);
-        DataBaseExecutive.initSqlManager();
+        BeanBox.set_context(this);
+        BeanBox.initSqlManager();
         //初始化View
         initView();
         //test
@@ -85,19 +82,12 @@ public class MainActivity extends AppCompatActivity {
         colorBtn=findViewById(R.id.colorBtn);
         listBtn=findViewById(R.id.listBtn);
         newBtn=findViewById(R.id.newBtn);
-        TipList=findViewById(R.id.TipList);
+        mListVie=findViewById(R.id.TipList);
         newItemView=findViewById(R.id.newItemView);
         itemInfoView=findViewById(R.id.itemInfoView);
         newTodoView=findViewById(R.id.newTodoView);
-        //fragment内
-        cancelNewTodo=findViewById(R.id.cancelNewTodo);
-        enterNewTodo=findViewById(R.id.enterNewTodo);
-        cancelNewItem=findViewById(R.id.cancelNewItem);
-        enterNewItem=findViewById(R.id.enterNewItem);
-        editItemBtn=findViewById(R.id.editItemBtn);
-        closeItemBtn=findViewById(R.id.closeItemBtn);
 
-        TipList.setLayoutManager(new LinearLayoutManager(this));//这里用线性显示 类似于listview
+        mListVie.setLayoutManager(new LinearLayoutManager(this));//这里用线性显示 类似于listview
 //        TipList.setLayoutManager(new GridLayoutManager(this, 2));//这里用线性宫格显示 类似于grid view
 //        TipList.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));//这里用线性宫格显示 类似于瀑布流
 
@@ -109,19 +99,15 @@ public class MainActivity extends AppCompatActivity {
         colorBtn.setOnClickListener(btnClick);
         listBtn.setOnClickListener(btnClick);
         newBtn.setOnClickListener(btnClick);
-        //fragment内
-        enterNewTodo.setOnClickListener(btnClick);
-        cancelNewTodo.setOnClickListener(btnClick);
-        cancelNewItem.setOnClickListener(btnClick);
-        enterNewItem.setOnClickListener(btnClick);
-        editItemBtn.setOnClickListener(btnClick);
-        closeItemBtn.setOnClickListener(btnClick);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        itemInfoFragment=(ItemInfoFragment) fragmentManager.findFragmentById(R.id.ItemInfoFragment);
 
         //获得当前有的标签和物品列表
         GetTipList();
-//        if(GetItemList()>0){
-//            //创建物品列表
-//        }
+        if(GetItemList()>0){
+            CreateItemList();
+        }
     }
 
     private View.OnClickListener btnClick = new View.OnClickListener() {
@@ -162,25 +148,8 @@ public class MainActivity extends AppCompatActivity {
                     }else{
                         //新建物品
                         newItemView.setVisibility(View.VISIBLE);
+                        newBtn.setVisibility(View.GONE);
                     }
-                    break;
-                case R.id.enterNewTodo:
-                    newTodoView.setVisibility(View.GONE);
-                    break;
-                case R.id.cancelNewTodo:
-                    newTodoView.setVisibility(View.GONE);
-                    break;
-                case R.id.enterNewItem:
-                    newItemView.setVisibility(View.GONE);
-                    break;
-                case R.id.cancelNewItem:
-                    newItemView.setVisibility(View.GONE);
-                    break;
-                case R.id.editItemBtn:
-                    itemInfoView.setVisibility(View.GONE);
-                    newItemView.setVisibility(View.VISIBLE);
-                case R.id.closeItemBtn:
-                    itemInfoView.setVisibility(View.GONE);
                     break;
                     default:
                         break;
@@ -193,6 +162,12 @@ public class MainActivity extends AppCompatActivity {
      * @param _index
      */
     private void changePage(int _index){
+//        Log.d(TAG,"page "+_pageIndex+" to page "+_index);
+        if(_pageIndex==_index){
+            return;
+        }
+        mListVie.removeAllViews();
+        Log.d(TAG,"removeAllViews");
         _pageIndex=_index;
         allBtn.setTextColor(getResources().getColor(R.color.colorText));
         localBtn.setTextColor(getResources().getColor(R.color.colorText));
@@ -201,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         listBtn.setTextColor(getResources().getColor(R.color.colorText));
         switch (_index){
             case GO_ALL:
-//                CreateItemList();
+                CreateItemList();
                 allBtn.setTextColor(getResources().getColor(R.color.colorTitle));
                 break;
             case GO_LOCAL:
@@ -230,7 +205,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private void CreateTipList(int _index){
         List<TipInfo> _TipList=null;
-        TipList.removeAllViews();
         switch (_index){
             case GO_LOCAL:
                 _TipList=getLocationTipList();
@@ -247,10 +221,11 @@ public class MainActivity extends AppCompatActivity {
         }
         final List<TipInfo> _List=_TipList;
         tipAdapter=new TipAdapter(this,_List);
-        TipList.setAdapter(tipAdapter);
+        mListVie.setAdapter(tipAdapter);
         tipAdapter.setOnItemClickListener(new ListItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                if(itemInfoView.getVisibility()==View.VISIBLE || newItemView.getVisibility()==View.VISIBLE) return;
                 Intent _intent=new Intent();
                 _intent.putExtra("type", _pageIndex+"");
                 _intent.putExtra("value", _List.get(position).get_value());
@@ -264,16 +239,52 @@ public class MainActivity extends AppCompatActivity {
      * 创建物品列表
      */
     private void CreateItemList(){
-        TipList.removeAllViews();
-
-        itemList=getItemList();
-        itemAdapter=new ItemAdapter(this,itemList);
-        TipList.setAdapter(itemAdapter);
+        final List<ItemInfo> _List=getItemList();
+        itemAdapter=new ItemAdapter(this,_List);
+        mListVie.setAdapter(itemAdapter);
         itemAdapter.setOnItemClickListener(new ListItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                if(itemInfoView.getVisibility()==View.VISIBLE || newItemView.getVisibility()==View.VISIBLE) return;
                 itemInfoView.setVisibility(View.VISIBLE);
+                //设置详情data
+                itemInfoFragment.setInfo(getItemList().get(position));
             }
         });
+    }
+
+    //与Fragment通信的方法>>---------------------------------------------------------------
+    public void SendData(ItemInfo _info,int ViewCode){
+        switch (ViewCode){
+            case MessageCode.INFO_ITEM:
+                newItemView.setVisibility(View.VISIBLE);
+                itemInfoView.setVisibility(View.GONE);
+                newBtn.setVisibility(View.GONE);
+                break;
+            case MessageCode.NEW_ITEM:
+                newItemView.setVisibility(View.GONE);
+                newBtn.setVisibility(View.VISIBLE);
+                //保存信息到数据库
+                if(BeanBox.InsertNewItem(_info)>0){//保存后更新整个列表
+                    if(GetItemList()>0 && _pageIndex==GO_ALL){
+                        CreateItemList();
+                    }
+                }
+                break;
+        }
+//        Log.d(TAG,"send view");
+    }
+    public void HideMe(int ViewCode){
+//        view.setVisibility(View.GONE);
+        switch (ViewCode){
+            case MessageCode.INFO_ITEM:
+                itemInfoView.setVisibility(View.GONE);
+                break;
+            case MessageCode.NEW_ITEM:
+                newItemView.setVisibility(View.GONE);
+                newBtn.setVisibility(View.VISIBLE);
+                break;
+        }
+//        Log.d(TAG,"hide view");
     }
 }

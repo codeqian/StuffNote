@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import net.codepig.stuffnote.DataBean.ItemInfo;
 import net.codepig.stuffnote.R;
@@ -27,10 +28,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-//        private TextView title;
+        private TextView itemName;
+        private TextView itemFunction;
+        private TextView itemLocation;
+        private TextView itemDescription;
         public MyViewHolder(View itemView) {
             super(itemView);
-//            title = (TextView) itemView.findViewById(R.id.rv_main_item_title);
+            itemName = itemView.findViewById(R.id.itemName);
+            itemFunction = itemView.findViewById(R.id.itemFunction);
+            itemLocation = itemView.findViewById(R.id.itemLocation);
+            itemDescription = itemView.findViewById(R.id.itemDescription);
         }
     }
 
@@ -59,7 +66,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         if (myData != null) {
-//            holder.TipName.setText(myData.get(position).get_value());
+            holder.itemName.setText(myData.get(position).get_name());
+            holder.itemFunction.setText(myData.get(position).get_function());
+            holder.itemLocation.setText(myData.get(position).get_location());
+            holder.itemDescription.setText(myData.get(position).get_description());
         }
         holder.itemView.setTag(position);//将position保存在itemView的tag中
     }

@@ -53,6 +53,8 @@
         android:textColor="@color/colorText"
         app:layout_constraintStart_toEndOf="@+id/typeBtn" />
     <net.codepig.stuffnote.View.CustomView.ScaleTextView
+        android:visibility="gone"
+        tools:visibility="visible"
         app:textSizePx="28"
         android:id="@+id/listBtn"
         android:gravity="center"

@@ -56,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <Button
-                android:id="@+id/enterNewTodo"
+                android:id="@+id/enterTodo"
                 android:text="确定"
                 android:layout_margin="@dimen/BaseMargin"
                 android:background="@drawable/btn_bg_rounded"
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="32dp" />
             <Button
-                android:id="@+id/cancelNewTodo"
+                android:id="@+id/cancelTodo"
                 android:text="取消"
                 android:layout_margin="@dimen/BaseMargin"
                 android:background="@drawable/btn_bg_rounded"

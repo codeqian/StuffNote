@@ -14,18 +14,20 @@
         android:background="@drawable/btn_bg_round_stroke"
         android:paddingTop="@dimen/BasePadding"
         android:paddingBottom="@dimen/BasePadding"
-        android:paddingLeft="@dimen/DoublePadding"
-        android:paddingRight="@dimen/DoublePadding"
+        android:paddingLeft="@dimen/BasePadding"
+        android:paddingRight="@dimen/BasePadding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent="0.7">
+        app:layout_constraintWidth_percent="0.8">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <net.codepig.stuffnote.View.CustomView.ScaleTextView
+                android:id="@+id/item_name"
+                app:textSizePx="32"
                 android:text="Title"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
@@ -34,48 +36,64 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
+                android:id="@+id/deleteItemBtn"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/HalfMargin"
+                android:src="@mipmap/delete"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <ImageView
                 android:id="@+id/editItemBtn"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="@dimen/HalfMargin"
                 android:src="@mipmap/edit"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
             <ImageView
-                android:id="@+id/closeItemBtn"
+                android:id="@+id/closeBtn"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="@dimen/HalfMargin"
                 android:src="@mipmap/close"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
         </LinearLayout>
         <net.codepig.stuffnote.View.CustomView.ScaleTextView
             app:textSizePx="32"
-            android:id="@+id/item_name"
+            android:id="@+id/item_loc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorTitle"
+            android:textColor="@color/colorText"
             android:text="位置" />
 
         <net.codepig.stuffnote.View.CustomView.ScaleTextView
             app:textSizePx="32"
+            android:id="@+id/item_fun"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorTitle"
+            android:textColor="@color/colorText"
             android:text="功能" />
 
         <net.codepig.stuffnote.View.CustomView.ScaleTextView
             app:textSizePx="32"
+            android:id="@+id/item_des"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorTitle"
+            android:textColor="@color/colorText"
             android:text="备注详情" />
 
         <net.codepig.stuffnote.View.CustomView.ScaleTextView
             app:textSizePx="32"
+            android:id="@+id/item_color"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorTitle"
+            android:textColor="@color/colorText"
             android:text="色彩" />
+
+        <ImageView
+            android:id="@+id/item_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/camera" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

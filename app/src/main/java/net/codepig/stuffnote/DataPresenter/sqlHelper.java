@@ -14,7 +14,7 @@ import net.codepig.stuffnote.common.BaseConfig;
 public class sqlHelper extends SQLiteOpenHelper {
     public sqlHelper(Context context)
     {
-        super(context, BaseConfig._DbName, null, 1);//最后个参数用以更新数据库
+        super(context, BaseConfig._DbName, null, 2);//最后个参数用以更新数据库
         //this(context, name, factory, version, null);
     }
 
@@ -22,7 +22,7 @@ public class sqlHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         Log.d("LOGCAT","creatDb");
         //物品信息表(id，名称，位置，功能，色彩，描述，图片名称,时间戳)
-        db.execSQL("CREATE TABLE " + BaseConfig._ItemListTableName +" (_id INTEGER PRIMARY KEY AUTOINCREMENT, _name VARCHAR, _loc VARCHAR, _fun VARCHAR, _color VARCHAR, _des VARCHAR, _image VARCHAR, _time INTEGER)");
+        db.execSQL("CREATE TABLE " + BaseConfig._ItemListTableName +" (_id INTEGER PRIMARY KEY AUTOINCREMENT, _name VARCHAR, _loc VARCHAR, _fun VARCHAR, _color VARCHAR, _des VARCHAR, _image VARCHAR, _time VARCHAR)");
         //标签表(id，标签类型，标签名
         db.execSQL("CREATE TABLE " + BaseConfig._TipListTableName +" (_id INTEGER PRIMARY KEY AUTOINCREMENT, _type INTEGER, _name VARCHAR)");
     }

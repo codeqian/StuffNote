@@ -7,12 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import net.codepig.stuffnote.common.BaseConfig;
-import net.codepig.stuffnote.DataBean.ItemInfo;
 import net.codepig.stuffnote.DataBean.TipInfo;
-import net.codepig.stuffnote.DataBean.ToDoInfo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -97,8 +92,8 @@ public class DataBaseExecutive {
     /**
      * 查询标签是否已存在
      */
-    public static int CheckTipData(int _type,String _name){
-        Log.d(TAG,"check for:"+_type+"_"+_name);
+    private static int CheckTipData(int _type,String _name){
+//        Log.d(TAG,"check for:"+_type+"_"+_name);
         if(_mDB==null){
             Log.d(TAG,"_mDB is null");
             return 0;
@@ -114,7 +109,7 @@ public class DataBaseExecutive {
         Cursor c = _mDB.query(BaseConfig._TipListTableName, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
         c.moveToFirst();
         if(c.getCount()>0){
-            Log.d(TAG,"check c.getCount():"+c.getCount());
+//            Log.d(TAG,"check c.getCount():"+c.getCount());
             return c.getCount();
         }
         c.close();
@@ -126,15 +121,16 @@ public class DataBaseExecutive {
      * 插入物品记录
      * @return
      */
-    public static long InsertItemData(){
+    public static long InsertItemData(String _name,String _loc,String _fun,String _color,String _des,String _image,String _time){
+//        Log.d(TAG,"info:"+_name+"_"+_loc+"_"+_fun+"_"+_color+"_"+_des);
         ContentValues cv=new ContentValues();
-//        cv.put("vid", vid);
-//        cv.put("type", "video");
-//        cv.put("vname", vname);
-//        cv.put("uname", uname);
-//        cv.put("imgUrl", imgUrl);
-//        cv.put("vUrl", downUrl);
-//        cv.put("done", 0);
+        cv.put("_name", _name);
+        cv.put("_loc", _loc);
+        cv.put("_fun", _fun);
+        cv.put("_color", _color);
+        cv.put("_des", _des);
+        cv.put("_image", _image);
+        cv.put("_time", _time);
         long _id=_mDB.insert(BaseConfig._ItemListTableName, "null",cv);
         return _id;
     }
@@ -142,28 +138,71 @@ public class DataBaseExecutive {
     /**
      * 更新物品记录
      */
-    public static int UpdataItem(String _type,String _v){
-        int _count=0;
-        return _count;
+    public static int UpdataItem(String _id,String _name,String _loc,String _fun,String _color,String _des,String _image,String _time){
+        String selection = "_id=?";//条件
+        String[] selectionArgs = new String[] { _id };//条件值
+        ContentValues cv=new ContentValues();
+        cv.put("_name", _name);
+        cv.put("_loc", _loc);
+        cv.put("_fun", _fun);
+        cv.put("_color", _color);
+        cv.put("_des", _des);
+        cv.put("_image", _image);
+        cv.put("_time", _time);
+        int _updateId=_mDB.update(BaseConfig._ItemListTableName, cv, selection, selectionArgs);
+        return _updateId;
     }
 
     /**
-     * 删除物品记录
+     * 删除物品记录（仅比较名称和时间戳）
      */
-    public static void DeleteItemData(String _type,String _v){
-        //
+    public static void DeleteItemData(String _id){
+        String selection = "_id=?";//条件
+        String[] selectionArgs = new String[] { _id };//条件值
+        _mDB.delete(BaseConfig._ItemListTableName, selection, selectionArgs);
     }
 
     /**
-     * 查询物品记录
+     * 查询所有物品记录
      */
-    public static void QueryItemData(String _type,String _v){
+    public static Cursor CursorQueryAllItem(){
+        if(_mDB==null){
+            Log.d(TAG,"_mDB is null");
+            return null;
+        }
+        String rawQuerySql =  "select * from "+BaseConfig._ItemListTableName;
+        Cursor c = _mDB.rawQuery(rawQuerySql,null);
+        c.moveToFirst();
+//        Log.d(TAG,"item c.getCount():"+c.getCount());
+        if(c.getCount()>0){
+            return c;
+        }
+        c.close();
+        return null;
+    }
 
+    /**
+     * 查询特定名称物品记录
+     */
+    public static Cursor QueryTheItemData(String _name){
         //数据
-        List<ItemInfo> ItemList;
-        List<TipInfo> FunctionTipList;
-        List<TipInfo> LocationTipList;
-        List<TipInfo> ColorTipList;
-        List<ToDoInfo> ToDoList;
+        if(_mDB==null){
+            Log.d(TAG,"_mDB is null");
+            return null;
+        }
+        String[] columns = new String[] { "_id","_name","_loc", "_fun", "_color","_des", "_image","_time" };//需要返回的值
+        String selection = "_name=?";//条件
+        String[] selectionArgs = new String[] { _name };//条件值
+        String groupBy = null;
+        String having = null;
+        String orderBy = null;
+        String limit = null;
+        Cursor c = _mDB.query(BaseConfig._ItemListTableName, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
+        c.moveToFirst();
+        if(c.getCount()>0){
+            return c;
+        }
+        c.close();
+        return null;
     }
 }

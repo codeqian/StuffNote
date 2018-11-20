@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
     private ImageView searchBtn,setBtn;
     private TextView localBtn,typeBtn,colorBtn,listBtn,allBtn;
     private Button newBtn;
-    private RecyclerView mListVie;
+    private RecyclerView mListView;
     private FrameLayout newItemView,newTodoView,itemInfoView;
     private TipAdapter tipAdapter;
     private ItemAdapter itemAdapter;
@@ -82,12 +82,12 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
         colorBtn=findViewById(R.id.colorBtn);
         listBtn=findViewById(R.id.listBtn);
         newBtn=findViewById(R.id.newBtn);
-        mListVie=findViewById(R.id.TipList);
+        mListView=findViewById(R.id.TipList);
         newItemView=findViewById(R.id.newItemView);
         itemInfoView=findViewById(R.id.itemInfoView);
         newTodoView=findViewById(R.id.newTodoView);
 
-        mListVie.setLayoutManager(new LinearLayoutManager(this));//这里用线性显示 类似于listview
+        mListView.setLayoutManager(new LinearLayoutManager(this));//这里用线性显示 类似于listview
 //        TipList.setLayoutManager(new GridLayoutManager(this, 2));//这里用线性宫格显示 类似于grid view
 //        TipList.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));//这里用线性宫格显示 类似于瀑布流
 
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
         if(_pageIndex==_index){
             return;
         }
-        mListVie.removeAllViews();
+        mListView.removeAllViews();
         Log.d(TAG,"removeAllViews");
         _pageIndex=_index;
         allBtn.setTextColor(getResources().getColor(R.color.colorText));
@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
         }
         final List<TipInfo> _List=_TipList;
         tipAdapter=new TipAdapter(this,_List);
-        mListVie.setAdapter(tipAdapter);
+        mListView.setAdapter(tipAdapter);
         tipAdapter.setOnItemClickListener(new ListItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
     private void CreateItemList(){
         final List<ItemInfo> _List=getItemList();
         itemAdapter=new ItemAdapter(this,_List);
-        mListVie.setAdapter(itemAdapter);
+        mListView.setAdapter(itemAdapter);
         itemAdapter.setOnItemClickListener(new ListItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -253,7 +253,31 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
         });
     }
 
-    //与Fragment通信的方法>>---------------------------------------------------------------
+    //与Fragment通信的方法 (FragmentDataCommunicate接口中定义)>>---------------------------------------------------------------
+    /**
+     * 删除条目(暂时只用于详情fragment)
+     */
+    public void DeleteData(ItemInfo _info,int ViewCode){
+        switch (ViewCode){
+            case MessageCode.INFO_ITEM:
+                itemInfoView.setVisibility(View.GONE);
+                BeanBox.DeleteTheItem(_info);
+                //更新列表
+                if(_pageIndex==GO_ALL){
+                    if(GetItemList()>=0) {
+                        Log.d(TAG,"BeanBox.getItemList().size()"+BeanBox.getItemList().size());
+                        CreateItemList();
+                    }
+                }
+                break;
+        }
+    }
+
+    /**
+     * 详情fragment页用来打开新建fragment页，fragment也用来发送新建命令
+     * @param _info
+     * @param ViewCode
+     */
     public void SendData(ItemInfo _info,int ViewCode){
         switch (ViewCode){
             case MessageCode.INFO_ITEM:
@@ -274,6 +298,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
         }
 //        Log.d(TAG,"send view");
     }
+
+    /**
+     * 隐藏fragment
+     * @param ViewCode
+     */
     public void HideMe(int ViewCode){
 //        view.setVisibility(View.GONE);
         switch (ViewCode){

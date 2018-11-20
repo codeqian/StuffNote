@@ -154,7 +154,7 @@ public class DataBaseExecutive {
     }
 
     /**
-     * 删除物品记录（仅比较名称和时间戳）
+     * 删除物品记录
      */
     public static void DeleteItemData(String _id){
         String selection = "_id=?";//条件

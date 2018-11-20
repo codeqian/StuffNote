@@ -19,7 +19,6 @@ import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.CursorQueryA
 import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.InsertTipData;
 import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.QueryTheItemData;
 import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.QueryTipData;
-import static net.codepig.stuffnote.DataPresenter.TimeBox.getCurrentTime;
 
 /**
  * 统一存放数据bean
@@ -157,6 +156,13 @@ public class BeanBox {
             c.close();
         }
         return ItemList.size();
+    }
+
+    /**
+     * 删除物品
+     */
+    public static void DeleteTheItem(ItemInfo _info){
+        DataBaseExecutive.DeleteItemData(_info.get_id());
     }
 
     /**

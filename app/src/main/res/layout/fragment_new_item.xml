@@ -37,6 +37,7 @@
             android:orientation="vertical">
             <EditText
                 android:text="测试名"
+                android:maxLength="10"
                 android:textColor="@color/colorTitle"
                 android:id="@+id/item_name"
                 android:layout_width="match_parent"
@@ -44,10 +45,11 @@
                 android:textColorHint="@color/colorText"
                 android:textCursorDrawable="@null"
                 android:theme="@style/MyEditText"
-                android:hint="输入名称" />
+                android:hint="名称(最多10字)" />
 
             <EditText
                 android:text="测试位置"
+                android:maxLength="10"
                 android:id="@+id/item_loc"
                 android:textColor="@color/colorTitle"
                 android:layout_width="match_parent"
@@ -55,10 +57,11 @@
                 android:textColorHint="@color/colorText"
                 android:textCursorDrawable="@null"
                 android:theme="@style/MyEditText"
-                android:hint="输入位置" />
+                android:hint="位置标签(最多10字)" />
 
             <EditText
                 android:text="测试功能"
+                android:maxLength="10"
                 android:id="@+id/item_fun"
                 android:textColor="@color/colorTitle"
                 android:layout_width="match_parent"
@@ -66,10 +69,11 @@
                 android:textColorHint="@color/colorText"
                 android:textCursorDrawable="@null"
                 android:theme="@style/MyEditText"
-                android:hint="输入功能标签" />
+                android:hint="功能标签(最多10字)" />
 
             <EditText
                 android:text="随便写的测试描述"
+                android:maxLength="200"
                 android:id="@+id/item_des"
                 android:textColor="@color/colorTitle"
                 android:layout_width="match_parent"
@@ -77,7 +81,7 @@
                 android:textColorHint="@color/colorText"
                 android:textCursorDrawable="@null"
                 android:theme="@style/MyEditText"
-                android:hint="输入详情备注" />
+                android:hint="详情(最多200字)" />
 
             <EditText
                 android:text="red"

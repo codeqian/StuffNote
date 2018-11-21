@@ -30,7 +30,6 @@ import java.util.List;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.GetItemList;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.getColorTipList;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.getFunctionTipList;
-import static net.codepig.stuffnote.DataPresenter.BeanBox.testTipList;
 import static net.codepig.stuffnote.common.MessageCode.GO_ALL;
 import static net.codepig.stuffnote.common.MessageCode.GO_COLOR;
 import static net.codepig.stuffnote.common.MessageCode.GO_FUNCTION;
@@ -69,8 +68,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
         BeanBox.initSqlManager();
         //初始化View
         initView();
-        //test
-        testTipList();
     }
 
     private void initView(){
@@ -167,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
             return;
         }
         mListView.removeAllViews();
-        Log.d(TAG,"removeAllViews");
+//        Log.d(TAG,"removeAllViews");
         _pageIndex=_index;
         allBtn.setTextColor(getResources().getColor(R.color.colorText));
         localBtn.setTextColor(getResources().getColor(R.color.colorText));
@@ -217,9 +214,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
                 break;
         }
         if(_TipList==null){
+//            Log.d(TAG,"_TipList==null");
             return;
         }
         final List<TipInfo> _List=_TipList;
+//        Log.d(TAG,"List:"+_List.size());
         tipAdapter=new TipAdapter(this,_List);
         mListView.setAdapter(tipAdapter);
         tipAdapter.setOnItemClickListener(new ListItemClickListener() {
@@ -274,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
     }
 
     /**
-     * 详情fragment页用来打开新建fragment页，fragment也用来发送新建命令
+     * 详情fragment页用来打开新建fragment页，fragment页用来发送新建命令
      * @param _info
      * @param ViewCode
      */
@@ -293,6 +292,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
                     if(GetItemList()>0 && _pageIndex==GO_ALL){
                         CreateItemList();
                     }
+                }
+                //保存新标签
+                int _count=BeanBox.InsertNewTip(_info);
+                if(_count>0){
+                    GetTipList();
                 }
                 break;
         }

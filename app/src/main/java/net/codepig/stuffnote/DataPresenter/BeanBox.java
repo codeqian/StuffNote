@@ -127,6 +127,33 @@ public class BeanBox {
     }
 
     /**
+     * 插入新标签
+     */
+    public static int InsertNewTip(ItemInfo _info){
+        int _addCount=0;
+        //依次加入各标签
+        if(_info.get_location()!=null || !_info.get_location().equals("")) {
+            long _id = DataBaseExecutive.InsertTipData(TipInfo.LOCATION_TIP,_info.get_location());
+            if(_id>0){
+                _addCount++;
+            }
+        }
+        if(_info.get_function()!=null || !_info.get_function().equals("")) {
+            long _id = DataBaseExecutive.InsertTipData(TipInfo.FUNCTION_TIP,_info.get_function());
+            if(_id>0){
+                _addCount++;
+            }
+        }
+        if(_info.get_color()!=null || !_info.get_color().equals("")) {
+            long _id = DataBaseExecutive.InsertTipData(TipInfo.COLOR_TIP,_info.get_color());
+            if(_id>0){
+                _addCount++;
+            }
+        }
+        return _addCount;
+    }
+
+    /**
      * 获得所有物品列表
      */
     public static int GetItemList(){
@@ -200,12 +227,5 @@ public class BeanBox {
     public static long InsertNewItem(ItemInfo _info){
         long _id=DataBaseExecutive.InsertItemData(_info.get_name(),_info.get_location(),_info.get_function(),_info.get_color(),_info.get_description(),_info.get_imageUrl(),_info.get_time());
         return _id;
-    }
-
-    //    测试数据---------------------------------------------------------------------------------------
-    public static void testTipList(){
-        InsertTipData(LOCATION_TIP,"客厅");
-        InsertTipData(FUNCTION_TIP,"日用品");
-        InsertTipData(COLOR_TIP,"red");
     }
 }

@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval"
     android:useLevel="false">
-
-    <solid android:color="@color/orange"/>
+    <stroke
+        android:width="2dp"
+        android:color="@color/red" /><!--边线  -->
 </shape>

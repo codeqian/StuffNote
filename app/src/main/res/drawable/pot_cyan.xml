@@ -5,6 +5,4 @@
     android:useLevel="false">
 
     <solid android:color="@color/cyan"/>
-    <size android:width="8dp"
-        android:height="8dp"/>
 </shape>

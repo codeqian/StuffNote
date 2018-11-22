@@ -8,6 +8,7 @@
     tools:context=".SearchPage">
     <ImageView
         android:id="@+id/backBtn"
+        android:tint="@color/colorButton"
         android:layout_width="30dp"
         android:layout_height="0dp"
         android:src="@mipmap/chevron_left"
@@ -15,6 +16,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <net.codepig.stuffnote.View.CustomView.ScaleTextView
+        android:id="@+id/tipTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

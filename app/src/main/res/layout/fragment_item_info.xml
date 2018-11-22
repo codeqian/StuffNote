@@ -25,6 +25,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <View
+                android:id="@+id/itemColor"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginRight="@dimen/HalfMargin"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/pot_cyan"
+                app:layout_constraintBottom_toBottomOf="@+id/itemName"
+                app:layout_constraintTop_toTopOf="@+id/itemName" />
             <net.codepig.stuffnote.View.CustomView.ScaleTextView
                 android:id="@+id/item_name"
                 app:textSizePx="32"
@@ -37,6 +46,7 @@
                 android:layout_height="wrap_content" />
             <ImageView
                 android:id="@+id/deleteItemBtn"
+                android:tint="@color/colorButton"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="@dimen/HalfMargin"
                 android:src="@mipmap/delete"
@@ -44,6 +54,7 @@
                 android:layout_height="20dp" />
             <ImageView
                 android:id="@+id/editItemBtn"
+                android:tint="@color/colorButton"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="@dimen/HalfMargin"
                 android:src="@mipmap/edit"
@@ -51,6 +62,7 @@
                 android:layout_height="20dp" />
             <ImageView
                 android:id="@+id/closeBtn"
+                android:tint="@color/colorButton"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="@dimen/HalfMargin"
                 android:src="@mipmap/close"
@@ -81,16 +93,9 @@
             android:textColor="@color/colorText"
             android:text="备注详情" />
 
-        <net.codepig.stuffnote.View.CustomView.ScaleTextView
-            app:textSizePx="32"
-            android:id="@+id/item_color"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorText"
-            android:text="色彩" />
-
         <ImageView
             android:id="@+id/item_image"
+            android:tint="@color/colorButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@mipmap/camera" />

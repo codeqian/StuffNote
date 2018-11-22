@@ -3,27 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/BaseMargin"
-    android:padding="@dimen/HalfPadding"
+    android:paddingLeft="@dimen/BasePadding"
+    android:paddingRight="@dimen/BasePadding"
+    android:paddingTop="@dimen/HalfPadding"
+    android:paddingBottom="@dimen/HalfPadding"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@mipmap/map_pin" />
-
-    <net.codepig.stuffnote.View.CustomView.ScaleTextView
-        android:id="@+id/TipName"
-        android:textColor="@color/colorText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="位置描述"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:textSizePx="32" />
+    <LinearLayout
+        android:id="@+id/tipArea"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <net.codepig.stuffnote.View.CustomView.ScaleTextView
+            android:id="@+id/TipName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="位置描述"
+            android:textColor="@color/colorTitle"
+            app:textSizePx="32" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:rotation="180"
+            android:src="@mipmap/chevron_left"
+            android:tint="@color/colorButton" />
+    </LinearLayout>
     <!--分割线-->
     <View
         android:id="@+id/divider"
@@ -31,5 +38,5 @@
         android:layout_height="1dp"
         android:background="@color/colorLine"
         android:layout_marginTop="@dimen/BaseMargin"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/tipArea" />
 </android.support.constraint.ConstraintLayout>

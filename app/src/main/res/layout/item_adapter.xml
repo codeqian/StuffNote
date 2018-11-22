@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/BaseMargin"
-    android:padding="@dimen/HalfPadding"
+    android:paddingLeft="@dimen/BasePadding"
+    android:paddingRight="@dimen/BasePadding"
+    android:paddingTop="@dimen/HalfPadding"
+    android:paddingBottom="@dimen/HalfPadding"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <View

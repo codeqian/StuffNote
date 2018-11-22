@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
         }
         final List<TipInfo> _List=_TipList;
 //        Log.d(TAG,"List:"+_List.size());
-        tipAdapter=new TipAdapter(this,_List);
+        tipAdapter=new TipAdapter(this,_List,_index);
         mListView.setAdapter(tipAdapter);
         tipAdapter.setOnItemClickListener(new ListItemClickListener() {
             @Override

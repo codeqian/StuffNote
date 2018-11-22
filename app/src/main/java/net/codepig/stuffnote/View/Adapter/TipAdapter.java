@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import net.codepig.stuffnote.DataBean.TipInfo;
 import net.codepig.stuffnote.R;
+import net.codepig.stuffnote.common.MessageCode;
 
 import java.util.List;
 
@@ -17,11 +18,13 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.MyViewHolder> {
     private List<TipInfo> myData;
     private LayoutInflater inflater;
     private ViewGroup _parent;
+    private int _TipType= MessageCode.GO_LOCAL;
     //声明接口
     private ListItemClickListener mOnItemClickListener;
 
-    public TipAdapter(Context context, List<TipInfo> data) {
+    public TipAdapter(Context context, List<TipInfo> data,int _type) {
         super();
+        _TipType=_type;
         this.context = context;
         this.myData = data;
         inflater = LayoutInflater.from(context);
@@ -61,7 +64,38 @@ public class TipAdapter extends RecyclerView.Adapter<TipAdapter.MyViewHolder> {
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.TipName.setText(myData.get(position).get_value());
         if (myData != null) {
-            holder.TipName.setText(myData.get(position).get_value());
+            if(_TipType==MessageCode.GO_COLOR){
+                switch (Integer.parseInt(myData.get(position).get_value())){
+                    case MessageCode.RED_TIP:
+                        holder.TipName.setText("红");
+                        holder.TipName.setTextColor(context.getResources().getColor(R.color.red));
+                        break;
+                    case MessageCode.ORANGE_TIP:
+                        holder.TipName.setText("橙");
+                        holder.TipName.setTextColor(context.getResources().getColor(R.color.orange));
+                        break;
+                    case MessageCode.YELLOW_TIP:
+                        holder.TipName.setText("黄");
+                        holder.TipName.setTextColor(context.getResources().getColor(R.color.yellow));
+                        break;
+                    case MessageCode.GREEN_TIP:
+                        holder.TipName.setText("绿");
+                        holder.TipName.setTextColor(context.getResources().getColor(R.color.green));
+                        break;
+                    case MessageCode.BLUE_TIP:
+                        holder.TipName.setText("蓝");
+                        holder.TipName.setTextColor(context.getResources().getColor(R.color.blue));
+                        break;
+                    case MessageCode.CYAN_TIP:
+                        holder.TipName.setText("靛");
+                        holder.TipName.setTextColor(context.getResources().getColor(R.color.cyan));
+                        break;
+                    case MessageCode.PURPLE_TIP:
+                        holder.TipName.setText("紫");
+                        holder.TipName.setTextColor(context.getResources().getColor(R.color.purple));
+                        break;
+                }
+            }
         }
         holder.itemView.setTag(position);//将position保存在itemView的tag中
     }

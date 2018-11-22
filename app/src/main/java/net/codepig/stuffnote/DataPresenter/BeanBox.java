@@ -111,13 +111,13 @@ public class BeanBox {
         for (int i=0;i<_list.size();i++){
             TipInfo _tip=_list.get(i);
             switch (_tip.get_type()){
-                case 0:
+                case TipInfo.LOCATION_TIP:
                     LocationTipList.add(_tip);
                     break;
-                case 1:
+                case TipInfo.FUNCTION_TIP:
                     FunctionTipList.add(_tip);
                     break;
-                case 2:
+                case TipInfo.COLOR_TIP:
                     ColorTipList.add(_tip);
                     break;
             }
@@ -132,19 +132,19 @@ public class BeanBox {
     public static int InsertNewTip(ItemInfo _info){
         int _addCount=0;
         //依次加入各标签
-        if(_info.get_location()!=null || !_info.get_location().equals("")) {
+        if(_info.get_location()!=null && !_info.get_location().equals("")) {
             long _id = DataBaseExecutive.InsertTipData(TipInfo.LOCATION_TIP,_info.get_location());
             if(_id>0){
                 _addCount++;
             }
         }
-        if(_info.get_function()!=null || !_info.get_function().equals("")) {
+        if(_info.get_function()!=null && !_info.get_function().equals("")) {
             long _id = DataBaseExecutive.InsertTipData(TipInfo.FUNCTION_TIP,_info.get_function());
             if(_id>0){
                 _addCount++;
             }
         }
-        if(_info.get_color()!=null || !_info.get_color().equals("")) {
+        if(_info.get_color()!=null && !_info.get_color().equals("")) {
             long _id = DataBaseExecutive.InsertTipData(TipInfo.COLOR_TIP,_info.get_color());
             if(_id>0){
                 _addCount++;

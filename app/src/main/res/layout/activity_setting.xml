@@ -9,6 +9,7 @@
 
     <ImageView
         android:id="@+id/backBtn"
+        android:tint="@color/colorButton"
         android:layout_width="30dp"
         android:layout_height="0dp"
         android:src="@mipmap/chevron_left"

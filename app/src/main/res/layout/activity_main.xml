@@ -68,6 +68,7 @@
 
     <ImageView
         android:id="@+id/searchBtn"
+        android:tint="@color/colorButton"
         android:layout_marginRight="@dimen/BaseMargin"
         android:src="@mipmap/search"
         android:layout_width="20dp"
@@ -81,6 +82,7 @@
 
     <ImageView
         android:id="@+id/setBtn"
+        android:tint="@color/colorButton"
         android:layout_marginRight="@dimen/BaseMargin"
         android:src="@mipmap/settings"
         android:layout_width="20dp"

@@ -28,7 +28,8 @@ public class ItemInfoFragment extends Fragment {
     private ItemInfo _info;
 
     private ImageView closeBtn,editItemBtn,item_image,deleteItemBtn;
-    private TextView item_name,item_loc,item_fun,item_des,item_color;
+    private TextView item_name,item_loc,item_fun,item_des;
+    private View itemColor;
     private AlertDialog alertDialog;
 
     final String TAG="ItemInfoFragment LOGCAT";
@@ -49,7 +50,7 @@ public class ItemInfoFragment extends Fragment {
         item_loc=thisView.findViewById(R.id.item_loc);
         item_fun=thisView.findViewById(R.id.item_fun);
         item_des=thisView.findViewById(R.id.item_des);
-        item_color=thisView.findViewById(R.id.item_color);
+        itemColor=thisView.findViewById(R.id.itemColor);
         alertDialog = new AlertDialog.Builder(_context).create();
 
         alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "是啊", alertListener);
@@ -144,7 +145,32 @@ public class ItemInfoFragment extends Fragment {
         item_loc.setText(_info.get_location());
         item_fun.setText(_info.get_function());
         item_des.setText(_info.get_description());
-        item_color.setText(_info.get_color());
+        switch (Integer.parseInt(_info.get_color())){
+            case MessageCode.RED_TIP:
+                itemColor.setBackgroundResource(R.drawable.pot_red);
+                break;
+            case MessageCode.ORANGE_TIP:
+                itemColor.setBackgroundResource(R.drawable.pot_orange);
+                break;
+            case MessageCode.YELLOW_TIP:
+                itemColor.setBackgroundResource(R.drawable.pot_yellow);
+                break;
+            case MessageCode.GREEN_TIP:
+                itemColor.setBackgroundResource(R.drawable.pot_green);
+                break;
+            case MessageCode.CYAN_TIP:
+                itemColor.setBackgroundResource(R.drawable.pot_blue);
+                break;
+            case MessageCode.BLUE_TIP:
+                itemColor.setBackgroundResource(R.drawable.pot_cyan);
+                break;
+            case MessageCode.PURPLE_TIP:
+                itemColor.setBackgroundResource(R.drawable.pot_purple);
+                break;
+            default:
+                itemColor.setBackgroundResource(R.drawable.pot_cyan);
+                break;
+        }
         //还缺加载图片
     }
 }

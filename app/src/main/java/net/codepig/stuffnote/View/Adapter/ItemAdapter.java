@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import net.codepig.stuffnote.DataBean.ItemInfo;
 import net.codepig.stuffnote.R;
+import net.codepig.stuffnote.common.MessageCode;
 
 import java.util.List;
 
@@ -32,12 +33,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         private TextView itemFunction;
         private TextView itemLocation;
         private TextView itemDescription;
+        private View itemColor;
         public MyViewHolder(View itemView) {
             super(itemView);
             itemName = itemView.findViewById(R.id.itemName);
             itemFunction = itemView.findViewById(R.id.itemFunction);
             itemLocation = itemView.findViewById(R.id.itemLocation);
             itemDescription = itemView.findViewById(R.id.itemDescription);
+            itemColor = itemView.findViewById(R.id.itemColor);
         }
     }
 
@@ -70,6 +73,32 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             holder.itemFunction.setText(myData.get(position).get_function());
             holder.itemLocation.setText(myData.get(position).get_location());
             holder.itemDescription.setText(myData.get(position).get_description());
+            switch (Integer.parseInt(myData.get(position).get_color())){
+                case MessageCode.RED_TIP:
+                    holder.itemColor.setBackgroundResource(R.drawable.pot_red);
+                    break;
+                case MessageCode.ORANGE_TIP:
+                    holder.itemColor.setBackgroundResource(R.drawable.pot_orange);
+                    break;
+                case MessageCode.YELLOW_TIP:
+                    holder.itemColor.setBackgroundResource(R.drawable.pot_yellow);
+                    break;
+                case MessageCode.GREEN_TIP:
+                    holder.itemColor.setBackgroundResource(R.drawable.pot_green);
+                    break;
+                case MessageCode.CYAN_TIP:
+                    holder.itemColor.setBackgroundResource(R.drawable.pot_cyan);
+                    break;
+                case MessageCode.BLUE_TIP:
+                    holder.itemColor.setBackgroundResource(R.drawable.pot_blue);
+                    break;
+                case MessageCode.PURPLE_TIP:
+                    holder.itemColor.setBackgroundResource(R.drawable.pot_purple);
+                    break;
+                    default:
+                        holder.itemColor.setBackgroundResource(R.drawable.pot_cyan);
+                        break;
+            }
         }
         holder.itemView.setTag(position);//将position保存在itemView的tag中
     }

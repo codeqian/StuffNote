@@ -35,12 +35,14 @@
                 android:layout_height="wrap_content" />
             <ImageView
                 android:id="@+id/editBtn"
+                android:tint="@color/colorButton"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="@dimen/HalfMargin"
                 android:src="@mipmap/edit"
                 android:layout_width="30dp"
                 android:layout_height="30dp" />
             <ImageView
+                android:tint="@color/colorButton"
                 android:id="@+id/closeTodoBtn"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="@dimen/HalfMargin"

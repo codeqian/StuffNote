@@ -23,6 +23,7 @@ import net.codepig.stuffnote.View.Adapter.ListItemClickListener;
 import net.codepig.stuffnote.View.Adapter.TipAdapter;
 import net.codepig.stuffnote.View.FragmentDataCommunicate;
 import net.codepig.stuffnote.View.ItemInfoFragment;
+import net.codepig.stuffnote.View.NewItemFragment;
 import net.codepig.stuffnote.common.MessageCode;
 
 import java.util.List;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
 
     //fragment
     private ItemInfoFragment itemInfoFragment;
+    private NewItemFragment newItemFragment;
 
     //final TAG
     private final String TAG="MAIN PAGE LOGCAT";
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         itemInfoFragment=(ItemInfoFragment) fragmentManager.findFragmentById(R.id.ItemInfoFragment);
+        newItemFragment=(NewItemFragment) fragmentManager.findFragmentById(R.id.newItemFragment);
 
         //获得当前有的标签和物品列表
         GetTipList();
@@ -281,6 +284,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
         switch (ViewCode){
             case MessageCode.INFO_ITEM:
                 newItemView.setVisibility(View.VISIBLE);
+                newItemFragment.setInfo(_info);
                 itemInfoView.setVisibility(View.GONE);
                 newBtn.setVisibility(View.GONE);
                 break;

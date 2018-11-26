@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -14,8 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.codepig.stuffnote.DataBean.ItemInfo;
+import net.codepig.stuffnote.DataPresenter.ImageLoader;
 import net.codepig.stuffnote.R;
+import net.codepig.stuffnote.common.BaseConfig;
 import net.codepig.stuffnote.common.MessageCode;
+import net.codepig.stuffnote.common.ThreadPoolUtils;
 
 /**
  * 物品详情
@@ -32,7 +36,7 @@ public class ItemInfoFragment extends Fragment {
     private View itemColor;
     private AlertDialog alertDialog;
 
-    final String TAG="ItemInfoFragment LOGCAT";
+    private final String TAG="ItemInfoFragment LOGCAT";
 
     public ItemInfoFragment() {
         // Required empty public constructor
@@ -90,7 +94,7 @@ public class ItemInfoFragment extends Fragment {
                     mFragmentDataCommunicate.HideMe(MessageCode.INFO_ITEM);
                     break;
                 case R.id.editItemBtn:
-                    mFragmentDataCommunicate.SendData(null,MessageCode.INFO_ITEM);
+                    mFragmentDataCommunicate.SendData(_info,MessageCode.INFO_ITEM);
                     break;
                 case R.id.deleteItemBtn:
                     showAlert("确定要删除这条记录吗？");
@@ -142,8 +146,18 @@ public class ItemInfoFragment extends Fragment {
     public void setInfo(ItemInfo _v){
         _info=_v;
         item_name.setText(_info.get_name());
-        item_loc.setText(_info.get_location());
-        item_fun.setText(_info.get_function());
+        if(_info.get_location()!=null && !_info.get_location().equals("")) {
+            item_loc.setText(_info.get_location());
+            item_loc.setVisibility(View.VISIBLE);
+        }else{
+            item_loc.setVisibility(View.GONE);
+        }
+        if(_info.get_function()!=null && !_info.get_function().equals("")) {
+            item_fun.setText(_info.get_function());
+            item_fun.setVisibility(View.VISIBLE);
+        }else{
+            item_fun.setVisibility(View.GONE);
+        }
         item_des.setText(_info.get_description());
         switch (Integer.parseInt(_info.get_color())){
             case MessageCode.RED_TIP:
@@ -159,10 +173,10 @@ public class ItemInfoFragment extends Fragment {
                 itemColor.setBackgroundResource(R.drawable.pot_green);
                 break;
             case MessageCode.CYAN_TIP:
-                itemColor.setBackgroundResource(R.drawable.pot_blue);
+                itemColor.setBackgroundResource(R.drawable.pot_cyan);
                 break;
             case MessageCode.BLUE_TIP:
-                itemColor.setBackgroundResource(R.drawable.pot_cyan);
+                itemColor.setBackgroundResource(R.drawable.pot_blue);
                 break;
             case MessageCode.PURPLE_TIP:
                 itemColor.setBackgroundResource(R.drawable.pot_purple);
@@ -171,6 +185,25 @@ public class ItemInfoFragment extends Fragment {
                 itemColor.setBackgroundResource(R.drawable.pot_cyan);
                 break;
         }
-        //还缺加载图片
+        if(_info.get_imageUrl()!=null && !_info.get_imageUrl().equals("")) {
+            final String _url=BaseConfig.SdCardRoot+BaseConfig.FilePath+_info.get_imageUrl()+".png";
+//            Log.d(TAG,"_url:"+_url);
+            Runnable bmpR = new Runnable() {
+                @Override
+                public void run() {
+                    final Bitmap Bmp = ImageLoader.returnBitMapLocal(_url, 480, 360);
+                    item_image.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            item_image.setImageBitmap(Bmp);
+                        }
+                    });
+                }
+            };
+            ThreadPoolUtils.execute(bmpR);
+            item_image.setVisibility(View.VISIBLE);
+        }else{
+            item_image.setVisibility(View.GONE);
+        }
     }
 }

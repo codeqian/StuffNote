@@ -9,7 +9,8 @@ public class BaseConfig {
     public static String _TipListTableName="TipList";
     public static String _TodoListTableName="TodoList";
 
-    //SDCard根目录
-    public static String SdCardRoot="";
+    public static String SdCardRoot="";//SDCard根目录
     public static String FilePath="/StuffNote/Images/";
+    public static String PhotoName="shoot.png";//拍摄的原始照片名(每次拍照覆盖)
+    public static String CropName="crop.png";//剪裁后的照片名(每次覆盖)
 }

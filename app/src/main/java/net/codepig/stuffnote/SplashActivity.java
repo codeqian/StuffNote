@@ -12,6 +12,8 @@ import android.widget.Button;
 import net.codepig.stuffnote.common.BaseConfig;
 import net.codepig.stuffnote.values.dimens;
 
+import static net.codepig.stuffnote.DataPresenter.ImageSaver.CheckSDCard;
+
 public class SplashActivity extends AppCompatActivity {
     private Button enterBtn;
     private Context context;
@@ -44,14 +46,6 @@ public class SplashActivity extends AppCompatActivity {
         dimens.appScale=_w/dimens.appWidth;
         dimens.appScaleH=_h/dimens.appHeight;
         Log.d(TAG,"当前屏幕大小为："+dimens.curWidth+"x"+dimens.curHeight);
-
-        //获取外部存储地址
-        BaseConfig.SdCardRoot= android.os.Environment.getExternalStorageDirectory().toString();
-        if(BaseConfig.SdCardRoot==null || BaseConfig.SdCardRoot.equals("")){
-            Log.d(TAG,"无外部存储器");
-        }else{
-            Log.d(TAG,"外部存储器地址为："+BaseConfig.SdCardRoot);
-        }
-
+        CheckSDCard();
     }
 }

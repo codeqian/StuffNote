@@ -12,10 +12,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/btn_bg_round_stroke"
-        android:paddingTop="@dimen/BasePadding"
-        android:paddingBottom="@dimen/BasePadding"
-        android:paddingLeft="@dimen/BasePadding"
-        android:paddingRight="@dimen/BasePadding"
+        android:paddingTop="@dimen/DoublePadding"
+        android:paddingBottom="@dimen/DoublePadding"
+        android:paddingLeft="@dimen/DoublePadding"
+        android:paddingRight="@dimen/DoublePadding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,6 +69,14 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp" />
         </LinearLayout>
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorLine"
+            android:layout_marginTop="@dimen/BaseMargin"
+            android:layout_marginBottom="@dimen/BaseMargin"
+            app:layout_constraintTop_toBottomOf="@+id/itemDescription" />
         <net.codepig.stuffnote.View.CustomView.ScaleTextView
             app:textSizePx="32"
             android:id="@+id/item_loc"
@@ -95,9 +103,12 @@
 
         <ImageView
             android:id="@+id/item_image"
-            android:tint="@color/colorButton"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/btn_bg_stroke"
+            android:scaleType="fitXY"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="2dp"
             android:src="@mipmap/camera" />
     </LinearLayout>
 

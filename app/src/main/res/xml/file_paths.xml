@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <paths>
+        <!--path就是要分享的目录，name随便取，是一个虚拟目录标识,path="."表示所有目录-->
+        <!--<external-path path="StuffNote/Images/" name="camera_photos" />-->
+        <external-path path="." name="camera_photos" />
+    </paths>
+</resources>

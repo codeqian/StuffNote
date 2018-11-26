@@ -1,10 +1,15 @@
 package net.codepig.stuffnote.DataPresenter;
 
+import android.graphics.Bitmap;
 import android.os.Environment;
 import android.os.StatFs;
 import android.util.Log;
 
+import net.codepig.stuffnote.common.BaseConfig;
+
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import static net.codepig.stuffnote.common.BaseConfig.FilePath;
 import static net.codepig.stuffnote.common.BaseConfig.SdCardRoot;
@@ -14,6 +19,9 @@ import static net.codepig.stuffnote.common.BaseConfig.SdCardRoot;
  */
 public class ImageSaver {
     private static Boolean hadSdcard=false;
+
+    public static final String FileType=".png";
+    private static final String TAG="ImageSaver LOGCAT";
 
     /**
      * 判断sd卡是否存在
@@ -27,6 +35,7 @@ public class ImageSaver {
                 SdCardRoot= android.os.Environment.getExternalStorageDirectory().toString();
             }
             _path=SdCardRoot+FilePath;
+            Log.d(TAG,"path:"+_path);
             CreateDir(_path);
         } else{
             hadSdcard=false;
@@ -87,5 +96,25 @@ public class ImageSaver {
         long allBlocks = sf.getBlockCountLong();
         //返回SD卡大小
         return (allBlocks * blockSize)/1024/1024; //单位MB
+    }
+
+    /**
+     * 将图片保存在SDcard
+     */
+    public static String SaveMyBitmap(Bitmap bitmap,String _name)
+    {
+        File f = new File(BaseConfig.SdCardRoot+BaseConfig.FilePath, _name+".png");
+        try
+        {
+            f.createNewFile();
+            FileOutputStream fOut = new FileOutputStream(f);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+            return BaseConfig.SdCardRoot+BaseConfig.FilePath+_name+".png";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

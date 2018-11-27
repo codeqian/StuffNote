@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -54,6 +53,7 @@ public class NewItemFragment extends Fragment {
     private String _imageUrl="";
     private int _colorTip=MessageCode.RED_TIP;
     private Uri mCutUri;
+    private boolean reEdit=false;
 
     private View thisView;
     private Button enterItem,cancelItem;
@@ -200,7 +200,9 @@ public class NewItemFragment extends Fragment {
                         Toast.makeText(_context, "必须要输入名称与描述哦!", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    _info=new ItemInfo();
+                    if(_info==null){
+                        _info=new ItemInfo();
+                    }
                     _info.set_name(item_name.getText().toString());
                     _info.set_description(item_des.getText().toString());
                     _info.set_location(item_loc.getText().toString());
@@ -208,7 +210,8 @@ public class NewItemFragment extends Fragment {
                     _info.set_color(_colorTip+"");
                     _info.set_imageUrl(_imageUrl);
                     _info.set_time(getCurrentTime());
-                    mFragmentDataCommunicate.SendData(_info,MessageCode.NEW_ITEM);
+                    mFragmentDataCommunicate.SendData(_info,MessageCode.NEW_ITEM,reEdit);
+                    reEdit=false;
                     mInputMethodManager.hideSoftInputFromWindow(_MainActivity.getCurrentFocus().getWindowToken(), 0);
 //                    Log.d(TAG,"info:"+_info.get_location()+"_"+_info.get_function());
                     break;
@@ -230,6 +233,7 @@ public class NewItemFragment extends Fragment {
      * @param _v
      */
     public void setInfo(ItemInfo _v){
+        reEdit=true;
         _info=_v;
         item_name.setText(_info.get_name());
         if(_info.get_location()!=null && !_info.get_location().equals("")) {

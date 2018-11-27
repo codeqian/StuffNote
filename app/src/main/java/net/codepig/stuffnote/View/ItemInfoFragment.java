@@ -94,7 +94,7 @@ public class ItemInfoFragment extends Fragment {
                     mFragmentDataCommunicate.HideMe(MessageCode.INFO_ITEM);
                     break;
                 case R.id.editItemBtn:
-                    mFragmentDataCommunicate.SendData(_info,MessageCode.INFO_ITEM);
+                    mFragmentDataCommunicate.SendData(_info,MessageCode.INFO_ITEM,false);
                     break;
                 case R.id.deleteItemBtn:
                     showAlert("确定要删除这条记录吗？");

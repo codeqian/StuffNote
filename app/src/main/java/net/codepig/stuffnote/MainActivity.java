@@ -3,7 +3,6 @@ package net.codepig.stuffnote;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -250,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
                 if(itemInfoView.getVisibility()==View.VISIBLE || newItemView.getVisibility()==View.VISIBLE) return;
                 itemInfoView.setVisibility(View.VISIBLE);
                 //设置详情data
-                itemInfoFragment.setInfo(getItemList().get(position));
+                itemInfoFragment.setInfo(_List.get(position));
             }
         });
     }
@@ -280,7 +279,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
      * @param _info
      * @param ViewCode
      */
-    public void SendData(ItemInfo _info,int ViewCode){
+    public void SendData(ItemInfo _info,int ViewCode,boolean _EditFlag){
         switch (ViewCode){
             case MessageCode.INFO_ITEM:
                 newItemView.setVisibility(View.VISIBLE);
@@ -292,9 +291,21 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
                 newItemView.setVisibility(View.GONE);
                 newBtn.setVisibility(View.VISIBLE);
                 //保存信息到数据库
-                if(BeanBox.InsertNewItem(_info)>0){//保存后更新整个列表
-                    if(GetItemList()>0 && _pageIndex==GO_ALL){
-                        CreateItemList();
+                //_EditFlag为true时时更新数据
+                if(_EditFlag){
+                    long _id=BeanBox.UpdateItem(_info);
+                    if(_id>0){
+                        //保存后更新整个列表
+                        if (_pageIndex == GO_ALL && GetItemList() > 0) {
+                            CreateItemList();
+                        }
+                    }
+                }else {
+                    if (BeanBox.InsertNewItem(_info) > 0) {
+                        //保存后更新整个列表
+                        if (_pageIndex == GO_ALL && GetItemList() > 0) {
+                            CreateItemList();
+                        }
                     }
                 }
                 //保存新标签

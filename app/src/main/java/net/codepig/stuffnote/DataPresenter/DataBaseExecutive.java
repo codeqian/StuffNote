@@ -8,6 +8,7 @@ import android.util.Log;
 
 import net.codepig.stuffnote.common.BaseConfig;
 import net.codepig.stuffnote.DataBean.TipInfo;
+import net.codepig.stuffnote.common.MessageCode;
 
 
 /**
@@ -138,7 +139,8 @@ public class DataBaseExecutive {
     /**
      * 更新物品记录
      */
-    public static int UpdataItem(String _id,String _name,String _loc,String _fun,String _color,String _des,String _image,String _time){
+    public static int UpdateItem(String _id,String _name,String _loc,String _fun,String _color,String _des,String _image,String _time){
+        Log.d(TAG,"update item id---"+_id);
         String selection = "_id=?";//条件
         String[] selectionArgs = new String[] { _id };//条件值
         ContentValues cv=new ContentValues();
@@ -193,6 +195,43 @@ public class DataBaseExecutive {
         String[] columns = new String[] { "_id","_name","_loc", "_fun", "_color","_des", "_image","_time" };//需要返回的值
         String selection = "_name=?";//条件
         String[] selectionArgs = new String[] { _name };//条件值
+        String groupBy = null;
+        String having = null;
+        String orderBy = null;
+        String limit = null;
+        Cursor c = _mDB.query(BaseConfig._ItemListTableName, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
+        c.moveToFirst();
+        if(c.getCount()>0){
+            return c;
+        }
+        c.close();
+        return null;
+    }
+
+    /**
+     * 查询特定标签物品记录
+     */
+    public static Cursor QueryTheItem4TipData(int _tip,String _v){
+        //数据
+        if(_mDB==null){
+            Log.d(TAG,"_mDB is null");
+            return null;
+        }
+        String[] columns = new String[] { "_id","_name","_loc", "_fun", "_color","_des", "_image","_time" };//需要返回的值
+        String selection="";
+        String[] selectionArgs;
+        switch (_tip){
+            case MessageCode.GO_LOCAL:
+                selection = "_loc=?";//条件
+                break;
+            case MessageCode.GO_FUNCTION:
+                selection = "_fun=?";
+                break;
+            case MessageCode.GO_COLOR:
+                selection = "_color=?";
+                break;
+        }
+        selectionArgs = new String[] { _v };//条件值
         String groupBy = null;
         String having = null;
         String orderBy = null;

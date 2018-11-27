@@ -34,6 +34,12 @@
         android:layout_height="10dp"
         app:layout_constraintTop_toBottomOf="@+id/backBtn"
         android:background="@drawable/gradual_line" />
+    <!--列表区域-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/TipList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
     <FrameLayout
         android:visibility="gone"
         android:id="@+id/itemInfoView"
@@ -44,5 +50,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:name="net.codepig.stuffnote.View.ItemInfoFragment"/>
+    </FrameLayout>
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/newItemView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <fragment
+            android:id="@+id/newItemFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="net.codepig.stuffnote.View.NewItemFragment"/>
     </FrameLayout>
 </android.support.constraint.ConstraintLayout>

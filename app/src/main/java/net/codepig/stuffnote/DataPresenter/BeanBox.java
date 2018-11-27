@@ -12,11 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.codepig.stuffnote.DataBean.TipInfo.ALL_TIP;
-import static net.codepig.stuffnote.DataBean.TipInfo.COLOR_TIP;
-import static net.codepig.stuffnote.DataBean.TipInfo.FUNCTION_TIP;
-import static net.codepig.stuffnote.DataBean.TipInfo.LOCATION_TIP;
 import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.CursorQueryAllItem;
-import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.InsertTipData;
+import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.QueryTheItem4TipData;
 import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.QueryTheItemData;
 import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.QueryTipData;
 
@@ -27,6 +24,7 @@ import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.QueryTipData
 public class BeanBox {
     private static List<ItemInfo> ItemList;//所有物品列表
     private static List<ItemInfo> TheItemList;//特定名称物品列表（用于搜索）
+    private static List<ItemInfo> Item4TipList;//按标签物品列表（用于搜索）
     private static List<TipInfo> FunctionTipList;//功能标签
     private static List<TipInfo> LocationTipList;//位置标签
     private static List<TipInfo> ColorTipList;//色彩标签
@@ -37,15 +35,20 @@ public class BeanBox {
     public static List<ItemInfo> getItemList() {
         return ItemList;
     }
-
     public static void setItemList(List<ItemInfo> itemList) {
         ItemList = itemList;
+    }
+
+    public static List<ItemInfo> getItem4TipList() {
+        return Item4TipList;
+    }
+    public static void setItem4TipList(List<ItemInfo> itemList) {
+        Item4TipList = itemList;
     }
 
     public static List<TipInfo> getFunctionTipList() {
         return FunctionTipList;
     }
-
     public static void setFunctionTipList(List<TipInfo> functionTipList) {
         FunctionTipList = functionTipList;
     }
@@ -53,7 +56,6 @@ public class BeanBox {
     public static List<TipInfo> getLocationTipList() {
         return LocationTipList;
     }
-
     public static void setLocationTipList(List<TipInfo> locationTipList) {
         LocationTipList = locationTipList;
     }
@@ -61,7 +63,6 @@ public class BeanBox {
     public static List<TipInfo> getColorTipList() {
         return ColorTipList;
     }
-
     public static void setColorTipList(List<TipInfo> colorTipList) {
         ColorTipList = colorTipList;
     }
@@ -69,7 +70,6 @@ public class BeanBox {
     public static List<ToDoInfo> getToDoList() {
         return ToDoList;
     }
-
     public static void setToDoList(List<ToDoInfo> toDoList) {
         ToDoList = toDoList;
     }
@@ -77,7 +77,6 @@ public class BeanBox {
     public static void set_context(Context _c){
         DataBaseExecutive.set_context(_c);
     }
-
     public static void initSqlManager(){
         DataBaseExecutive.initSqlManager();
     }
@@ -103,7 +102,7 @@ public class BeanBox {
                 _tip.set_value(c.getString(1));
                 _list.add(_tip);
                 c.moveToNext();
-                Log.d(TAG,"tip info:"+_tip.get_type()+"_"+_tip.get_value());
+//                Log.d(TAG,"tip info:"+_tip.get_type()+"_"+_tip.get_value());
             }
             c.close();
         }
@@ -170,7 +169,7 @@ public class BeanBox {
 //                "_id","_name","_loc", "_fun", "_color","_des", "_image","_time"
                 _item.set_id(c.getString(0));
                 _item.set_name(c.getString(1));
-                Log.d(TAG,"_item:"+_item.get_name());
+//                Log.d(TAG,"_item:"+_item.get_name());
                 _item.set_location(c.getString(2));
                 _item.set_function(c.getString(3));
                 _item.set_color(c.getString(4));
@@ -206,26 +205,75 @@ public class BeanBox {
         }else{
             int listLength = c.getCount();
             for (int i = 0; i < listLength; i++) {
-                ItemInfo _tip=new ItemInfo();
+                ItemInfo _item=new ItemInfo();
 //                "_id","_name","_loc", "_fun", "_color","_des", "_image","_time"
-                _tip.set_id(c.getString(0));
-                _tip.set_name(c.getString(1));
-                _tip.set_location(c.getString(2));
-                _tip.set_function(c.getString(3));
-                _tip.set_color(c.getString(4));
-                _tip.set_description(c.getString(5));
-                _tip.set_imageUrl(c.getString(6));
-                _tip.set_time(c.getString(7));
-                TheItemList.add(_tip);
+                _item.set_id(c.getString(0));
+                _item.set_name(c.getString(1));
+//                Log.d(TAG,"_item:"+_item.get_name());
+                _item.set_location(c.getString(2));
+                _item.set_function(c.getString(3));
+                _item.set_color(c.getString(4));
+                _item.set_description(c.getString(5));
+                _item.set_imageUrl(c.getString(6));
+                _item.set_time(c.getString(7));
+                TheItemList.add(_item);
                 c.moveToNext();
             }
             c.close();
         }
-        return ItemList.size();
+        return TheItemList.size();
     }
 
+    /**
+     * 查询单一标签物品列表
+     * @return
+     */
+    public static int GetItem4TipList(int _tip,String _v){
+        Item4TipList=new ArrayList<>();
+        //查询
+        Cursor c=QueryTheItem4TipData(_tip,_v);
+        if(c==null){
+            Log.d(TAG,"c==null");
+            return 0;
+        }else{
+            int listLength = c.getCount();
+            for (int i = 0; i < listLength; i++) {
+                ItemInfo _item=new ItemInfo();
+//                "_id","_name","_loc", "_fun", "_color","_des", "_image","_time"
+                _item.set_id(c.getString(0));
+                _item.set_name(c.getString(1));
+//                Log.d(TAG,"_item:"+_item.get_name());
+                _item.set_location(c.getString(2));
+                _item.set_function(c.getString(3));
+                _item.set_color(c.getString(4));
+                _item.set_description(c.getString(5));
+                _item.set_imageUrl(c.getString(6));
+                _item.set_time(c.getString(7));
+                Item4TipList.add(_item);
+                c.moveToNext();
+            }
+            c.close();
+        }
+        return Item4TipList.size();
+    }
+
+    /**
+     * 插入物品信息
+     * @param _info
+     * @return
+     */
     public static long InsertNewItem(ItemInfo _info){
         long _id=DataBaseExecutive.InsertItemData(_info.get_name(),_info.get_location(),_info.get_function(),_info.get_color(),_info.get_description(),_info.get_imageUrl(),_info.get_time());
+        return _id;
+    }
+
+    /**
+     * 插入物品信息
+     * @param _info
+     * @return
+     */
+    public static long UpdateItem(ItemInfo _info){
+        long _id=DataBaseExecutive.UpdateItem(_info.get_id(),_info.get_name(),_info.get_location(),_info.get_function(),_info.get_color(),_info.get_description(),_info.get_imageUrl(),_info.get_time());
         return _id;
     }
 }

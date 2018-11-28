@@ -190,7 +190,6 @@ public class ItemListPage extends AppCompatActivity implements FragmentDataCommu
                 }
                 break;
         }
-//        Log.d(TAG,"send view");
     }
 
     /**
@@ -198,7 +197,6 @@ public class ItemListPage extends AppCompatActivity implements FragmentDataCommu
      * @param ViewCode
      */
     public void HideMe(int ViewCode){
-//        view.setVisibility(View.GONE);
         switch (ViewCode){
             case MessageCode.INFO_ITEM:
                 itemInfoView.setVisibility(View.GONE);
@@ -207,6 +205,5 @@ public class ItemListPage extends AppCompatActivity implements FragmentDataCommu
                 newItemView.setVisibility(View.GONE);
                 break;
         }
-//        Log.d(TAG,"hide view");
     }
 }

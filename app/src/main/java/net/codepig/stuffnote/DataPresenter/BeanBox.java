@@ -14,7 +14,7 @@ import java.util.List;
 import static net.codepig.stuffnote.DataBean.TipInfo.ALL_TIP;
 import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.CursorQueryAllItem;
 import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.QueryTheItem4TipData;
-import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.QueryTheItemData;
+import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.QueryTheItemByNameData;
 import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.QueryTipData;
 
 /**
@@ -24,7 +24,7 @@ import static net.codepig.stuffnote.DataPresenter.DataBaseExecutive.QueryTipData
 public class BeanBox {
     private static List<ItemInfo> ItemList;//所有物品列表
     private static List<ItemInfo> TheItemList;//特定名称物品列表（用于搜索）
-    private static List<ItemInfo> Item4TipList;//按标签物品列表（用于搜索）
+    private static List<ItemInfo> Item4TipList;//按标签物品列表
     private static List<TipInfo> FunctionTipList;//功能标签
     private static List<TipInfo> LocationTipList;//位置标签
     private static List<TipInfo> ColorTipList;//色彩标签
@@ -37,6 +37,13 @@ public class BeanBox {
     }
     public static void setItemList(List<ItemInfo> itemList) {
         ItemList = itemList;
+    }
+
+    public static List<ItemInfo> getTheItemList() {
+        return TheItemList;
+    }
+    public static void setTheItemList(List<ItemInfo> itemList) {
+        TheItemList = itemList;
     }
 
     public static List<ItemInfo> getItem4TipList() {
@@ -195,10 +202,11 @@ public class BeanBox {
      * 查询单一物品信息
      * @return
      */
-    public static int GetTheItemList(String _name){
+    public static int GetTheItemByNameList(String _name){
         TheItemList=new ArrayList<>();
         //查询
-        Cursor c=QueryTheItemData(_name);
+        Cursor c=QueryTheItemByNameData(_name);
+//        Log.d(TAG,"c.getCount():"+c.getCount());
         if(c==null){
             Log.d(TAG,"c==null");
             return 0;

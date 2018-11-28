@@ -1,6 +1,7 @@
 package net.codepig.stuffnote.View.Adapter;
 
 import android.content.Context;
+import android.nfc.Tag;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -71,6 +72,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, int position) {
         if (myData != null) {
             holder.itemName.setText(myData.get(position).get_name());
+            Log.d("LOGCAT","name:"+myData.get(position).get_name());
             holder.itemFunction.setText(myData.get(position).get_function());
             holder.itemLocation.setText(myData.get(position).get_location());
             holder.itemDescription.setText(myData.get(position).get_description());

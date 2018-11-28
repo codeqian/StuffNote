@@ -33,4 +33,61 @@
         android:layout_height="10dp"
         app:layout_constraintTop_toBottomOf="@+id/backBtn"
         android:background="@drawable/gradual_line" />
+
+    <LinearLayout
+        android:id="@+id/EditArea"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        android:padding="@dimen/HalfPadding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/searchText"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTitle"
+            android:textColorHint="@color/colorText"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:textCursorDrawable="@null"
+            android:theme="@style/MyEditText"
+            android:hint="你要找的东西叫什么呢？" />
+
+        <ImageView
+            android:id="@+id/SearchBtn"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/HalfMargin"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/search"
+            android:tint="@color/colorButton" />
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ItemList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/EditArea" />
+
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/newItemView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <fragment
+            android:id="@+id/newItemFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="net.codepig.stuffnote.View.NewItemFragment"/>
+    </FrameLayout>
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/itemInfoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <fragment
+            android:id="@+id/ItemInfoFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="net.codepig.stuffnote.View.ItemInfoFragment"/>
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>

@@ -34,4 +34,83 @@
         android:layout_height="10dp"
         app:layout_constraintTop_toBottomOf="@+id/backBtn"
         android:background="@drawable/gradual_line" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        android:layout_margin="@dimen/BaseMargin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/BasePadding"
+            android:gravity="center_vertical">
+
+            <net.codepig.stuffnote.View.CustomView.ScaleTextView
+                app:textSizePx="32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="最新的物品排在列表最前面哦！"
+                android:textColor="@color/colorTitle" />
+            <Switch
+                android:id="@+id/OrderSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorLine" />
+        <net.codepig.stuffnote.View.CustomView.ScaleTextView
+            app:textSizePx="32"
+            android:padding="@dimen/BasePadding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="图片存放地址：/StuffNote/Images/"
+            android:textColor="@color/colorTitle" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorLine" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/BasePadding"
+            android:gravity="center_vertical">
+
+            <net.codepig.stuffnote.View.CustomView.ScaleTextView
+                app:textSizePx="32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="一点版本说明："
+                android:textColor="@color/colorTitle" />
+            <net.codepig.stuffnote.View.CustomView.ScaleTextView
+                app:textSizePx="32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="V0.1"
+                android:textColor="@color/colorText" />
+            <net.codepig.stuffnote.View.CustomView.ScaleTextView
+                app:textSizePx="32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="其实也没什么好说明的，有建议和意见可以发我下面的邮件哦。"
+                android:textColor="@color/colorText" />
+            <net.codepig.stuffnote.View.CustomView.ScaleTextView
+                app:textSizePx="32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="QZDSZZ@163.COM"
+                android:textColor="@color/colorText" />
+        </LinearLayout>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

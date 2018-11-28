@@ -78,7 +78,7 @@ public class DataBaseExecutive {
         }
         String groupBy = null;
         String having = null;
-        String orderBy = null;
+        String orderBy = "_id desc";
         String limit = null;
         Cursor c = _mDB.query(BaseConfig._TipListTableName, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
         c.moveToFirst();
@@ -105,7 +105,7 @@ public class DataBaseExecutive {
         String[] selectionArgs = new String[] { _type+"",_name };//条件值
         String groupBy = null;
         String having = null;
-        String orderBy = null;
+        String orderBy = "_id desc";
         String limit = null;
         Cursor c = _mDB.query(BaseConfig._TipListTableName, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
         c.moveToFirst();
@@ -172,7 +172,7 @@ public class DataBaseExecutive {
             Log.d(TAG,"_mDB is null");
             return null;
         }
-        String rawQuerySql =  "select * from "+BaseConfig._ItemListTableName;
+        String rawQuerySql =  "select * from "+BaseConfig._ItemListTableName+" order by _id desc";
         Cursor c = _mDB.rawQuery(rawQuerySql,null);
         c.moveToFirst();
 //        Log.d(TAG,"item c.getCount():"+c.getCount());
@@ -186,18 +186,18 @@ public class DataBaseExecutive {
     /**
      * 查询特定名称物品记录
      */
-    public static Cursor QueryTheItemData(String _name){
+    public static Cursor QueryTheItemByNameData(String _name){
         //数据
         if(_mDB==null){
             Log.d(TAG,"_mDB is null");
             return null;
         }
         String[] columns = new String[] { "_id","_name","_loc", "_fun", "_color","_des", "_image","_time" };//需要返回的值
-        String selection = "_name=?";//条件
-        String[] selectionArgs = new String[] { _name };//条件值
+        String selection = "_name like ?";//条件
+        String[] selectionArgs = new String[] { "%" + _name + "%" };//条件值
         String groupBy = null;
         String having = null;
-        String orderBy = null;
+        String orderBy = "_id desc";
         String limit = null;
         Cursor c = _mDB.query(BaseConfig._ItemListTableName, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
         c.moveToFirst();
@@ -234,7 +234,7 @@ public class DataBaseExecutive {
         selectionArgs = new String[] { _v };//条件值
         String groupBy = null;
         String having = null;
-        String orderBy = null;
+        String orderBy = "_id desc";
         String limit = null;
         Cursor c = _mDB.query(BaseConfig._ItemListTableName, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
         c.moveToFirst();

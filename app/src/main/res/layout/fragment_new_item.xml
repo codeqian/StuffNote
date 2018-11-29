@@ -7,6 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/ContextLayout"
         android:background="@drawable/btn_bg_round_stroke"
         android:padding="@dimen/BasePadding"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,22 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/ImageBtn"
-            android:padding="2dp"
-            android:background="@drawable/btn_bg_stroke"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/BasePadding"
-            app:layout_constraintWidth_default="percent"
-            app:layout_constraintWidth_percent="1"
-            app:layout_constraintDimensionRatio="4:3"
-            android:src="@mipmap/camera"
-            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
-            app:layout_constraintStart_toStartOf="@+id/linearLayout" />
         <LinearLayout
             android:id="@+id/linearLayout"
-            app:layout_constraintTop_toBottomOf="@+id/ImageBtn"
+            app:layout_constraintTop_toTopOf="@+id/ContextLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -152,28 +140,45 @@
                     android:id="@+id/purpleBtn"
                     android:layout_gravity="center_vertical" />
             </RadioGroup>
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/ImageBtn"
+            android:padding="2dp"
+            android:background="@drawable/btn_bg_stroke"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/BasePadding"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintDimensionRatio="4:3"
+            android:src="@mipmap/camera"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout" />
 
-            <LinearLayout
-                android:layout_gravity="center_horizontal"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/ImageBtn">
+
+            <Button
+                android:id="@+id/enterItem"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <Button
-                    android:id="@+id/enterItem"
-                    android:text="记下"
-                    android:layout_margin="@dimen/BaseMargin"
-                    android:background="@drawable/btn_bg_rounded"
-                    android:textColor="@color/colorButtonText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp" />
-                <Button
-                    android:id="@+id/cancelItem"
-                    android:text="算了"
-                    android:layout_margin="@dimen/BaseMargin"
-                    android:background="@drawable/btn_bg_rounded"
-                    android:textColor="@color/colorButtonText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp" />
-            </LinearLayout>
+                android:layout_height="32dp"
+                android:layout_margin="@dimen/BaseMargin"
+                android:background="@drawable/btn_bg_rounded"
+                android:text="记下"
+                android:textColor="@color/colorButtonText" />
+
+            <Button
+                android:id="@+id/cancelItem"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_margin="@dimen/BaseMargin"
+                android:background="@drawable/btn_bg_rounded"
+                android:text="算了"
+                android:textColor="@color/colorButtonText" />
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

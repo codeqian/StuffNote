@@ -27,7 +27,7 @@ import net.codepig.stuffnote.DataBean.ItemInfo;
 import net.codepig.stuffnote.DataPresenter.ImageLoader;
 import net.codepig.stuffnote.R;
 import net.codepig.stuffnote.common.BaseConfig;
-import net.codepig.stuffnote.common.GetImagePath;
+import net.codepig.stuffnote.DataPresenter.GetImagePath;
 import net.codepig.stuffnote.common.MessageCode;
 import net.codepig.stuffnote.common.ThreadPoolUtils;
 

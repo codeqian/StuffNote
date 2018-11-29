@@ -30,6 +30,7 @@ import java.util.List;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.GetItemList;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.getColorTipList;
 import static net.codepig.stuffnote.DataPresenter.BeanBox.getFunctionTipList;
+import static net.codepig.stuffnote.DataPresenter.SharedPreferencesManager.initSharedPreferences;
 import static net.codepig.stuffnote.common.MessageCode.GO_ALL;
 import static net.codepig.stuffnote.common.MessageCode.GO_COLOR;
 import static net.codepig.stuffnote.common.MessageCode.GO_FUNCTION;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
         BeanBox.initSqlManager();
         //初始化View
         initView();
+        initSharedPreferences(_context);
     }
 
     private void initView(){

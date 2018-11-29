@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.codepig.stuffnote.DataBean.ItemInfo;
+import net.codepig.stuffnote.DataPresenter.BeanBox;
 import net.codepig.stuffnote.DataPresenter.ImageLoader;
 import net.codepig.stuffnote.R;
 import net.codepig.stuffnote.common.BaseConfig;
@@ -205,5 +206,8 @@ public class ItemInfoFragment extends Fragment {
         }else{
             item_image.setVisibility(View.GONE);
         }
+        //查询频次加1
+        _info.set_fq(_info.get_fq()+1);
+        BeanBox.UpdateItem(_info);
     }
 }

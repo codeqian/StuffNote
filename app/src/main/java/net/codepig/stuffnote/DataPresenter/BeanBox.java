@@ -183,6 +183,7 @@ public class BeanBox {
                 _item.set_description(c.getString(5));
                 _item.set_imageUrl(c.getString(6));
                 _item.set_time(c.getString(7));
+                _item.set_fq(c.getInt(8));
                 ItemList.add(_item);
                 c.moveToNext();
             }
@@ -224,6 +225,7 @@ public class BeanBox {
                 _item.set_description(c.getString(5));
                 _item.set_imageUrl(c.getString(6));
                 _item.set_time(c.getString(7));
+                _item.set_fq(c.getInt(8));
                 TheItemList.add(_item);
                 c.moveToNext();
             }
@@ -257,6 +259,7 @@ public class BeanBox {
                 _item.set_description(c.getString(5));
                 _item.set_imageUrl(c.getString(6));
                 _item.set_time(c.getString(7));
+                _item.set_fq(c.getInt(8));
                 Item4TipList.add(_item);
                 c.moveToNext();
             }
@@ -276,12 +279,12 @@ public class BeanBox {
     }
 
     /**
-     * 插入物品信息
+     * 更新物品信息
      * @param _info
      * @return
      */
     public static long UpdateItem(ItemInfo _info){
-        long _id=DataBaseExecutive.UpdateItem(_info.get_id(),_info.get_name(),_info.get_location(),_info.get_function(),_info.get_color(),_info.get_description(),_info.get_imageUrl(),_info.get_time());
+        long _id=DataBaseExecutive.UpdateItem(_info.get_id(),_info.get_name(),_info.get_location(),_info.get_function(),_info.get_color(),_info.get_description(),_info.get_imageUrl(),_info.get_time(),_info.get_fq());
         return _id;
     }
 }

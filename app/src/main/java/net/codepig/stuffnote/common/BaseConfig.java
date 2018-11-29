@@ -13,4 +13,6 @@ public class BaseConfig {
     public static String FilePath="/StuffNote/Images/";
     public static String PhotoName="shoot.png";//拍摄的原始照片名(每次拍照覆盖)
     public static String CropName="crop.png";//剪裁后的照片名(每次覆盖)
+
+    public static boolean OrderByFrequency=true;
 }

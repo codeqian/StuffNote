@@ -132,6 +132,7 @@ public class DataBaseExecutive {
         cv.put("_des", _des);
         cv.put("_image", _image);
         cv.put("_time", _time);
+        cv.put("_fq", 0);
         long _id=_mDB.insert(BaseConfig._ItemListTableName, "null",cv);
         return _id;
     }
@@ -139,7 +140,7 @@ public class DataBaseExecutive {
     /**
      * 更新物品记录
      */
-    public static int UpdateItem(String _id,String _name,String _loc,String _fun,String _color,String _des,String _image,String _time){
+    public static int UpdateItem(String _id,String _name,String _loc,String _fun,String _color,String _des,String _image,String _time,int _fq){
         Log.d(TAG,"update item id---"+_id);
         String selection = "_id=?";//条件
         String[] selectionArgs = new String[] { _id };//条件值
@@ -151,6 +152,7 @@ public class DataBaseExecutive {
         cv.put("_des", _des);
         cv.put("_image", _image);
         cv.put("_time", _time);
+        cv.put("_fq", _fq);
         int _updateId=_mDB.update(BaseConfig._ItemListTableName, cv, selection, selectionArgs);
         return _updateId;
     }
@@ -172,7 +174,12 @@ public class DataBaseExecutive {
             Log.d(TAG,"_mDB is null");
             return null;
         }
-        String rawQuerySql =  "select * from "+BaseConfig._ItemListTableName+" order by _id desc";
+        String rawQuerySql;
+        if(BaseConfig.OrderByFrequency) {
+            rawQuerySql = "select * from " + BaseConfig._ItemListTableName + " order by _fq desc";
+        }else{
+            rawQuerySql = "select * from " + BaseConfig._ItemListTableName + " order by _id desc";
+        }
         Cursor c = _mDB.rawQuery(rawQuerySql,null);
         c.moveToFirst();
 //        Log.d(TAG,"item c.getCount():"+c.getCount());
@@ -192,12 +199,17 @@ public class DataBaseExecutive {
             Log.d(TAG,"_mDB is null");
             return null;
         }
-        String[] columns = new String[] { "_id","_name","_loc", "_fun", "_color","_des", "_image","_time" };//需要返回的值
+        String[] columns = new String[] { "_id","_name","_loc", "_fun", "_color","_des", "_image","_time","_fq" };//需要返回的值
         String selection = "_name like ?";//条件
         String[] selectionArgs = new String[] { "%" + _name + "%" };//条件值
         String groupBy = null;
         String having = null;
-        String orderBy = "_id desc";
+        String orderBy;
+        if(BaseConfig.OrderByFrequency) {
+            orderBy = "_fq desc";
+        }else{
+            orderBy = "_id desc";
+        }
         String limit = null;
         Cursor c = _mDB.query(BaseConfig._ItemListTableName, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
         c.moveToFirst();
@@ -217,7 +229,7 @@ public class DataBaseExecutive {
             Log.d(TAG,"_mDB is null");
             return null;
         }
-        String[] columns = new String[] { "_id","_name","_loc", "_fun", "_color","_des", "_image","_time" };//需要返回的值
+        String[] columns = new String[] { "_id","_name","_loc", "_fun", "_color","_des", "_image","_time","_fq" };//需要返回的值
         String selection="";
         String[] selectionArgs;
         switch (_tip){
@@ -234,7 +246,12 @@ public class DataBaseExecutive {
         selectionArgs = new String[] { _v };//条件值
         String groupBy = null;
         String having = null;
-        String orderBy = "_id desc";
+        String orderBy;
+        if(BaseConfig.OrderByFrequency) {
+            orderBy = "_fq desc";
+        }else{
+            orderBy = "_id desc";
+        }
         String limit = null;
         Cursor c = _mDB.query(BaseConfig._ItemListTableName, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
         c.moveToFirst();

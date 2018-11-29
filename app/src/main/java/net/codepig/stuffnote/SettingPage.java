@@ -3,13 +3,22 @@ package net.codepig.stuffnote;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.TextView;
+
+import net.codepig.stuffnote.common.BaseConfig;
+
+import static net.codepig.stuffnote.DataPresenter.SharedPreferencesManager.SaveOrder;
 
 /**
  * 设置页
  */
 public class SettingPage extends AppCompatActivity {
     private ImageView backBtn;
+    private TextView OrderText;
+    private Switch OrderSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +30,30 @@ public class SettingPage extends AppCompatActivity {
 
     private void initView(){
         backBtn=findViewById(R.id.backBtn);
+        OrderSwitch=findViewById(R.id.OrderSwitch);
+        OrderText=findViewById(R.id.OrderText);
+
+        if(BaseConfig.OrderByFrequency){
+            OrderSwitch.setChecked(true);
+            OrderText.setText("按查看次数排列。");
+        }else{
+            OrderSwitch.setChecked(false);
+            OrderText.setText("按加入时间排列。");
+        }
 
         backBtn.setOnClickListener(btnClick);
+        OrderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    OrderText.setText("按查看次数排列。");
+                    SaveOrder(true);
+                }else{
+                    OrderText.setText("按加入时间排列。");
+                    SaveOrder(false);
+                }
+            }
+        });
     }
 
     private View.OnClickListener btnClick = new View.OnClickListener() {

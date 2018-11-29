@@ -49,14 +49,16 @@
             android:gravity="center_vertical">
 
             <net.codepig.stuffnote.View.CustomView.ScaleTextView
+                android:id="@+id/OrderText"
                 app:textSizePx="32"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="最新的物品排在列表最前面哦！"
+                android:text="按查看次数排列。"
                 android:textColor="@color/colorTitle" />
             <Switch
                 android:id="@+id/OrderSwitch"
+                android:checked="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -70,8 +72,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="图片存放地址：/StuffNote/Images/"
+            android:text="图片存放地址："
             android:textColor="@color/colorTitle" />
+        <net.codepig.stuffnote.View.CustomView.ScaleTextView
+            app:textSizePx="32"
+            android:padding="@dimen/BasePadding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="/StuffNote/Images/"
+            android:textColor="@color/colorText" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -88,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="一点版本说明："
+                android:text="版本说明："
                 android:textColor="@color/colorTitle" />
             <net.codepig.stuffnote.View.CustomView.ScaleTextView
                 app:textSizePx="32"

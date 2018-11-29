@@ -11,7 +11,8 @@ public class ItemInfo {
     private String _function;
     private String _description;
     private String _imageUrl;
-    private String _time;
+    private String _time;//时间戳
+    private int _fq;//查询频次
 
     public void set_id(String _id) {
         this._id = _id;
@@ -66,8 +67,15 @@ public class ItemInfo {
     public void set_imageUrl(String _imageUrl) {
         this._imageUrl = _imageUrl;
     }
-
     public String get_imageUrl() {
         return _imageUrl;
+    }
+
+    public void set_fq(int _fq) {
+        this._fq = _fq;
+    }
+
+    public int get_fq() {
+        return _fq;
     }
 }

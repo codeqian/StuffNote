@@ -1,4 +1,4 @@
-package net.codepig.stuffnote.common;
+package net.codepig.stuffnote.DataPresenter;
 
 import android.annotation.SuppressLint;
 import android.content.ContentUris;

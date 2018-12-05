@@ -1,5 +1,7 @@
 package net.codepig.stuffnote;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +19,7 @@ import static net.codepig.stuffnote.DataPresenter.SharedPreferencesManager.SaveO
  */
 public class SettingPage extends AppCompatActivity {
     private ImageView backBtn;
-    private TextView OrderText;
+    private TextView OrderText,privacyNote,myMail;
     private Switch OrderSwitch;
 
     @Override
@@ -32,6 +34,8 @@ public class SettingPage extends AppCompatActivity {
         backBtn=findViewById(R.id.backBtn);
         OrderSwitch=findViewById(R.id.OrderSwitch);
         OrderText=findViewById(R.id.OrderText);
+        privacyNote=findViewById(R.id.privacyNote);
+        myMail=findViewById(R.id.myMail);
 
         if(BaseConfig.OrderByFrequency){
             OrderSwitch.setChecked(true);
@@ -42,6 +46,8 @@ public class SettingPage extends AppCompatActivity {
         }
 
         backBtn.setOnClickListener(btnClick);
+        privacyNote.setOnClickListener(btnClick);
+        myMail.setOnClickListener(btnClick);
         OrderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -62,6 +68,14 @@ public class SettingPage extends AppCompatActivity {
             switch (view.getId()) {
                 case R.id.backBtn:
                     finish();
+                    break;
+                case R.id.privacyNote:
+                    Uri uri = Uri.parse("https://github.com/codeqian/StuffNote/blob/master/privacy.md");
+                    startActivity(new Intent(Intent.ACTION_VIEW,uri));
+                    break;
+                case R.id.myMail:
+                    Uri uri2 = Uri.parse("mailto:qzdszz@163.com");
+                    startActivity(new Intent(Intent.ACTION_SENDTO,uri2));
                     break;
             }
         }

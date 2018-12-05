@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDataCommu
     //view
     private ImageView searchBtn,setBtn;
     private TextView localBtn,typeBtn,colorBtn,listBtn,allBtn;
-    private Button newBtn;
+    private ImageView newBtn;
     private RecyclerView mListView;
     private FrameLayout newItemView,newTodoView,itemInfoView;
     private TipAdapter tipAdapter;

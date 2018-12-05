@@ -6,14 +6,23 @@
     <color name="colorTranslateWhite">#66FFFFFF</color>
     <color name="colorTranslateBlack">#33000000</color>
 
-    <!--基本配色-->
-    <color name="colorButton">#71c9ce</color>
-    <color name="colorTitle">#71c9ce</color>
+    <!--基本配色1-->
+    <color name="colorButton">#61adc9</color>
+    <color name="colorTitle">#61adc9</color>
     <color name="colorLine">#cbf1f5</color>
     <color name="colorBg">#e3fdfd</color>
-    <color name="colorText">#a6e3e9</color>
+    <color name="colorText">#86cee9</color>
     <color name="colorButtonText">#ffffff</color>
-    <color name="colorHighLight">#5fb0b4</color>
+    <color name="colorHighLight">#6dbdda</color>
+
+    <!--&lt;!&ndash;基本配色2&ndash;&gt;-->
+    <!--<color name="colorButton">#7874f2</color>-->
+    <!--<color name="colorTitle">#7874f2</color>-->
+    <!--<color name="colorLine">#dfe2fe</color>-->
+    <!--<color name="colorBg">#ffffff</color>-->
+    <!--<color name="colorText">#8e98f5</color>-->
+    <!--<color name="colorButtonText">#ffffff</color>-->
+    <!--<color name="colorHighLight">#7874f2</color>-->
 
     <!--七色-->
     <color name="red">#fd3a3a</color>

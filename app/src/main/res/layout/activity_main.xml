@@ -108,18 +108,16 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
-    <Button
+    <ImageView
         android:id="@+id/newBtn"
-        android:text="+"
-        android:textSize="32dp"
-        android:textColor="@color/colorButtonText"
+        android:src="@mipmap/new_item"
+        android:tint="@color/colorButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/btn_bg_circle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginBottom="16dp" />
     <FrameLayout
         android:visibility="gone"
         android:id="@+id/newItemView"
